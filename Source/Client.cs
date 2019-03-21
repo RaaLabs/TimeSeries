@@ -52,16 +52,16 @@ namespace Dolittle.Edge.Modules
         /// <inheritdoc/>
         public Task SendEvent(Output output, Message message)
         {
-            _logger.Information($"Send event to {output}");
+            _logger.Information($"Send event to '{output}'");
             return _client.SendEventAsync(output, message);
         }
 
         /// <inheritdoc/>
         public Task SendEventAsJson(Output output, object @event)
         {
-            _logger.Information($"Send event as JSON to {output}");
+            _logger.Information($"Send event as JSON to '{output}'");
             var outputMessageString = _serializer.ToJson(@event);
-            _logger.Information($"Event JSON: {outputMessageString}");
+            _logger.Information($"Event JSON: '{outputMessageString}'");
             var outputMessageBytes = Encoding.UTF8.GetBytes(outputMessageString);
             var outputMessage = new Message(outputMessageBytes);
             return _client.SendEventAsync(output, outputMessage);
