@@ -18,7 +18,7 @@ namespace Dolittle.Edge.Modules
         /// <inheritdoc/>
         public void Provide(IBindingProviderBuilder builder)
         {
-            if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("IOTEDGE_WORKLOADURI")))
+            if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("EdgeHubConnectionString")))
                 builder.Bind<IClient>().To<NullClient>();
             else
                 builder.Bind<IClient>().To<Client>();
