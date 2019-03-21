@@ -20,6 +20,7 @@ namespace Dolittle.Edge.Modules
     {
         ModuleClient _client;
         private readonly ISerializer _serializer;
+        private readonly ILogger _logger;
 
         /// <summary>
         /// Initializes a new instance of <see cref="Client"/>
@@ -28,6 +29,7 @@ namespace Dolittle.Edge.Modules
         /// <param name="serializer"><see cref="ISerializer">JSON serializer</see></param>
         public Client(ILogger logger, ISerializer serializer)
         {
+            _logger = logger;
             _serializer = serializer;
             logger.Information("Setting up ModuleClient");
 
@@ -50,13 +52,16 @@ namespace Dolittle.Edge.Modules
         /// <inheritdoc/>
         public Task SendEvent(Output output, Message message)
         {
+            _logger.Information($"Send event to {output}");
             return _client.SendEventAsync(output, message);
         }
 
         /// <inheritdoc/>
         public Task SendEventAsJson(Output output, object @event)
         {
+            _logger.Information($"Send event as JSON to {output}");
             var outputMessageString = _serializer.ToJson(@event);
+            _logger.Information($"Event JSON: {outputMessageString}");
             var outputMessageBytes = Encoding.UTF8.GetBytes(outputMessageString);
             var outputMessage = new Message(outputMessageBytes);
             return _client.SendEventAsync(output, outputMessage);
