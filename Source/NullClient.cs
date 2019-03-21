@@ -19,6 +19,12 @@ namespace Dolittle.Edge.Modules
         }
 
         /// <inheritdoc/>
+        public Task SendEventAsJson(Output output, object @event)
+        {
+            return Task.CompletedTask;
+        }
+
+        /// <inheritdoc/>
         public Task SetInputMessageHandler(Input input, MessageHandler messageHandler, object userContext)
         {
             return Task.CompletedTask;

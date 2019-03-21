@@ -29,5 +29,14 @@ namespace Dolittle.Edge.Modules
         /// <param name="message"><see cref="Message"/> to send</param>
         /// <returns>Awaitable <see cref="Task"/></returns>
         Task SendEvent(Output output, Message message);
+
+        /// <summary>
+        /// Send an event as JSON to a specific <see cref="Output"/>
+        /// </summary>
+        /// <param name="output"><see cref="Output"/> to send to</param>
+        /// <param name="event">Event in any type to send</param>
+        /// <returns>Awaitable <see cref="Task"/></returns>
+        Task SendEventAsJson(Output output, object @event);
+
     }
 }

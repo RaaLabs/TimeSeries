@@ -7,6 +7,8 @@ using Microsoft.Azure.Devices.Client;
 using Microsoft.Azure.Devices.Client.Transport.Mqtt;
 using Dolittle.Lifecycle;
 using Dolittle.Logging;
+using Dolittle.Serialization.Json;
+using System.Text;
 
 namespace Dolittle.Edge.Modules
 {
@@ -17,13 +19,16 @@ namespace Dolittle.Edge.Modules
     public class Client : IClient
     {
         ModuleClient _client;
+        private readonly ISerializer _serializer;
 
         /// <summary>
         /// Initializes a new instance of <see cref="Client"/>
         /// </summary>
         /// <param name="logger"><see cref="ILogger"/> for logging</param>
-        public Client(ILogger logger)
+        /// <param name="serializer"><see cref="ISerializer">JSON serializer</see></param>
+        public Client(ILogger logger, ISerializer serializer)
         {
+            _serializer = serializer;
             logger.Information("Setting up ModuleClient");
 
             var mqttSetting = new MqttTransportSettings(TransportType.Mqtt_Tcp_Only);
@@ -38,6 +43,7 @@ namespace Dolittle.Edge.Modules
             logger.Information("Open and wait");
             _client.OpenAsync().Wait();
             logger.Information("Client is ready");
+            
         }
 
 
@@ -45,6 +51,15 @@ namespace Dolittle.Edge.Modules
         public Task SendEvent(Output output, Message message)
         {
             return _client.SendEventAsync(output, message);
+        }
+
+        /// <inheritdoc/>
+        public Task SendEventAsJson(Output output, object @event)
+        {
+            var outputMessageString = _serializer.ToJson(@event);
+            var outputMessageBytes = Encoding.UTF8.GetBytes(outputMessageString);
+            var outputMessage = new Message(outputMessageBytes);
+            return _client.SendEventAsync(output, outputMessage);
         }
 
         /// <inheritdoc/>
