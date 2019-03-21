@@ -9,6 +9,7 @@ using Microsoft.Azure.Devices.Client.Transport.Mqtt;
 
 namespace Dolittle.Edge.Modules
 {
+
     /// <summary>
     /// Provides bindings
     /// </summary>
