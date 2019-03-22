@@ -70,7 +70,7 @@ namespace Dolittle.Edge.Modules
         /// <inheritdoc/>
         public Task SetInputMessageHandler(Input input, MessageHandler messageHandler, object userContext)
         {
-            return SetInputMessageHandler(input, messageHandler, userContext);
+            return _client.SetInputMessageHandlerAsync(input, messageHandler, userContext);
         }
     }
 }
