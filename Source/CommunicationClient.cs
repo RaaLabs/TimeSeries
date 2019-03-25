@@ -2,32 +2,33 @@
  *  Copyright (c) Dolittle. All rights reserved.
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
+using System;
+using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Azure.Devices.Client;
-using Microsoft.Azure.Devices.Client.Transport.Mqtt;
 using Dolittle.Lifecycle;
 using Dolittle.Logging;
 using Dolittle.Serialization.Json;
-using System.Text;
+using Microsoft.Azure.Devices.Client;
+using Microsoft.Azure.Devices.Client.Transport.Mqtt;
 
 namespace Dolittle.Edge.Modules
 {
     /// <summary>
-    /// Represents an implementation of <see cref="IClient"/>
+    /// Represents an implementation of <see cref="ICommunicationClient"/>
     /// </summary>
     [Singleton]
-    public class Client : IClient
+    public class CommunicationClient : ICommunicationClient
     {
         ModuleClient _client;
         private readonly ISerializer _serializer;
         private readonly ILogger _logger;
 
         /// <summary>
-        /// Initializes a new instance of <see cref="Client"/>
+        /// Initializes a new instance of <see cref="CommunicationClient"/>
         /// </summary>
         /// <param name="logger"><see cref="ILogger"/> for logging</param>
         /// <param name="serializer"><see cref="ISerializer">JSON serializer</see></param>
-        public Client(ILogger logger, ISerializer serializer)
+        public CommunicationClient(ILogger logger, ISerializer serializer)
         {
             _logger = logger;
             _serializer = serializer;
@@ -45,19 +46,11 @@ namespace Dolittle.Edge.Modules
             logger.Information("Open and wait");
             _client.OpenAsync().Wait();
             logger.Information("Client is ready");
-            
-        }
 
-
-        /// <inheritdoc/>
-        public Task SendEvent(Output output, Message message)
-        {
-            _logger.Information($"Send event to '{output}'");
-            return _client.SendEventAsync(output, message);
         }
 
         /// <inheritdoc/>
-        public Task SendEventAsJson(Output output, object @event)
+        public Task SendAsJson(Output output, object @event)
         {
             _logger.Information($"Send event as JSON to '{output}'");
             var outputMessageString = _serializer.ToJson(@event);
@@ -68,10 +61,32 @@ namespace Dolittle.Edge.Modules
         }
 
         /// <inheritdoc/>
-        public Task SetInputMessageHandler(Input input, MessageHandler messageHandler, object userContext)
+        public void SubscribeTo<T>(Input input, Subscriber<T> subscriber)
         {
-            _logger.Information($"Setting input message handler for '{input}'");
-            return _client.SetInputMessageHandlerAsync(input, messageHandler, userContext);
+            _logger.Information($"Subscribing to '{input}' for type '{typeof(T).AssemblyQualifiedName}'");
+            _client.SetInputMessageHandlerAsync(input, async(message, context) =>
+            {
+                _logger.Information($"Handling incoming for '{subscriber.GetType().AssemblyQualifiedName}' on input '{input}'");
+                return await HandleSubscriber(subscriber, message);
+            }, null);
+
+        }
+
+        async Task<MessageResponse> HandleSubscriber<T>(Subscriber<T> subscriber, Message message)
+        {
+            try
+            {
+                var messageBytes = message.GetBytes();
+                var messageString = Encoding.UTF8.GetString(messageBytes);
+                var deserialized = _serializer.FromJson<T>(messageString);
+                await subscriber(deserialized);
+                return MessageResponse.Completed;
+            }
+            catch(Exception ex)
+            {
+                _logger.Error(ex, "Error during handling");
+                return MessageResponse.Abandoned;
+            }
         }
     }
 }

@@ -8,26 +8,20 @@ using Microsoft.Azure.Devices.Client;
 namespace Dolittle.Edge.Modules
 {
     /// <summary>
-    /// Represents a null implementation of <see cref="IClient"/>
+    /// Represents a null implementation of <see cref="ICommunicationClient"/>
     /// </summary>
-    public class NullClient : IClient
+    public class NullCommunicationClient : ICommunicationClient
     {
         /// <inheritdoc/>
-        public Task SendEvent(Output output, Message message)
+        public Task SendAsJson(Output output, object payload)
         {
             return Task.CompletedTask;
         }
 
         /// <inheritdoc/>
-        public Task SendEventAsJson(Output output, object @event)
+        public void SubscribeTo<T>(Input input, Subscriber<T> subscriber)
         {
-            return Task.CompletedTask;
-        }
-
-        /// <inheritdoc/>
-        public Task SetInputMessageHandler(Input input, MessageHandler messageHandler, object userContext)
-        {
-            return Task.CompletedTask;
+            
         }
     }
 }

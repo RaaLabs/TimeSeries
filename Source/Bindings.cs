@@ -19,9 +19,9 @@ namespace Dolittle.Edge.Modules
         public void Provide(IBindingProviderBuilder builder)
         {
             if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("EdgeHubConnectionString")))
-                builder.Bind<IClient>().To<NullClient>();
+                builder.Bind<ICommunicationClient>().To<NullCommunicationClient>();
             else
-                builder.Bind<IClient>().To<Client>();
+                builder.Bind<ICommunicationClient>().To<CommunicationClient>();
         }
     }
 }
