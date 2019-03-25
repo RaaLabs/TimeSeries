@@ -21,8 +21,8 @@ namespace Dolittle.Edge.Modules
         public T Value {  get; set; }
 
         /// <summary>
-        /// Gets or sets <see cref="TimeStamp"/> in EPOCH microseconds
+        /// Gets or sets <see cref="Timestamp"/> in EPOCH microseconds
         /// </summary>
-        public Timestamp TimeStamp {  get; set; }
+        public Timestamp Timestamp {  get; set; }
     }
 }
