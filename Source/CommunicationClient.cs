@@ -50,11 +50,11 @@ namespace Dolittle.Edge.Modules
         }
 
         /// <inheritdoc/>
-        public Task SendAsJson(Output output, object @event)
+        public Task SendAsJson(Output output, object payload)
         {
-            _logger.Information($"Send event as JSON to '{output}'");
-            var outputMessageString = _serializer.ToJson(@event);
-            _logger.Information($"Event JSON: '{outputMessageString}'");
+            _logger.Information($"Send as JSON to '{output}'");
+            var outputMessageString = _serializer.ToJson(payload);
+            _logger.Information($"Payload: '{outputMessageString}'");
             var outputMessageBytes = Encoding.UTF8.GetBytes(outputMessageString);
             var outputMessage = new Message(outputMessageBytes);
             return _client.SendEventAsync(output, outputMessage);
