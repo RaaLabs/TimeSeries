@@ -23,6 +23,6 @@ namespace Dolittle.Edge.Modules
         /// <summary>
         /// Gets or sets <see cref="TimeStamp"/> in EPOCH microseconds
         /// </summary>
-        public TimeStamp TimeStamp {  get; set; }
+        public Timestamp TimeStamp {  get; set; }
     }
 }

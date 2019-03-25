@@ -10,7 +10,7 @@ namespace Dolittle.Edge.Modules
     /// <summary>
     /// Represents a timestamp in EPOCH microseconds
     /// </summary>
-    public class TimeStamp : Value<TimeStamp>
+    public class Timestamp : Value<Timestamp>
     {
         /// <summary>
         /// Gets or sets the value
@@ -18,21 +18,21 @@ namespace Dolittle.Edge.Modules
         public long Value { get; set; }
 
         /// <summary>
-        /// Implicitly convert <see cref="TimeStamp"/> to its <see cref="long"/> representation
+        /// Implicitly convert <see cref="Timestamp"/> to its <see cref="long"/> representation
         /// </summary>
-        /// <param name="timeStamp"><see cref="TimeStamp"/> to get the <see cref="long"/> representation of</param>
-        public static implicit operator long(TimeStamp timeStamp)
+        /// <param name="timeStamp"><see cref="Timestamp"/> to get the <see cref="long"/> representation of</param>
+        public static implicit operator long(Timestamp timeStamp)
         {
             return timeStamp.Value;
         }
 
         /// <summary>
-        /// Implicitly convert <see cref="long"/> to its <see cref="TimeStamp"/> representation
+        /// Implicitly convert <see cref="long"/> to its <see cref="Timestamp"/> representation
         /// </summary>
-        /// <param name="timeStamp"><see cref="long"/> representation of <see cref="TimeStamp"/></param>
-        public static implicit operator TimeStamp(long timeStamp)
+        /// <param name="timeStamp"><see cref="long"/> representation of <see cref="Timestamp"/></param>
+        public static implicit operator Timestamp(long timeStamp)
         {
-            return new TimeStamp { Value = timeStamp };
+            return new Timestamp { Value = timeStamp };
         }
     }
 }
