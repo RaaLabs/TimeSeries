@@ -19,6 +19,12 @@ namespace Dolittle.Edge.Modules
         }
 
         /// <inheritdoc/>
+        public Task SendRaw(Output output, byte[] payload)
+        {
+            return Task.CompletedTask;
+        }
+
+        /// <inheritdoc/>
         public void SubscribeTo<T>(Input input, Subscriber<T> subscriber)
         {
             

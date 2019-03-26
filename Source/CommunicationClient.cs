@@ -60,6 +60,16 @@ namespace Dolittle.Edge.Modules
             return _client.SendEventAsync(output, outputMessage);
         }
 
+
+        /// <inheritdoc/>
+        public Task SendRaw(Output output, byte[] payload)
+        {
+            _logger.Information($"Sending raw to '{output}");
+            var outputMessage = new Message(payload);
+            return _client.SendEventAsync(output, outputMessage);         
+        }
+
+
         /// <inheritdoc/>
         public void SubscribeTo<T>(Input input, Subscriber<T> subscriber)
         {
@@ -71,6 +81,8 @@ namespace Dolittle.Edge.Modules
             }, null);
 
         }
+
+        
 
         async Task<MessageResponse> HandleSubscriber<T>(Subscriber<T> subscriber, Message message)
         {

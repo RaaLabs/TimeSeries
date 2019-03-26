@@ -28,5 +28,13 @@ namespace Dolittle.Edge.Modules
         /// <param name="payload">Payload in any type to send</param>
         /// <returns>Awaitable <see cref="Task"/></returns>
         Task SendAsJson(Output output, object payload);
+
+        /// <summary>
+        /// Send a payload as raw byte array to a specific <see cref="Output"/>
+        /// </summary>
+        /// <param name="output"><see cref="Output"/> to send to</param>
+        /// <param name="payload">Payload in any type to send</param>
+        /// <returns>Awaitable <see cref="Task"/></returns>
+        Task SendRaw(Output output, byte[] payload);
     }
 }
