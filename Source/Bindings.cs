@@ -28,7 +28,7 @@ namespace Dolittle.Edge.Modules
         bool IsRunningInIotEdge()
         {
             return  !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("EdgeHubConnectionString")) ||
-                    !string.IsNullOrEmpty((Environment.GetEnvironmentVariable("IOTEDGE_MODULEID"));            
+                    !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("IOTEDGE_MODULEID"));
         }
     }
 }
