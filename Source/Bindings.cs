@@ -18,10 +18,17 @@ namespace Dolittle.Edge.Modules
         /// <inheritdoc/>
         public void Provide(IBindingProviderBuilder builder)
         {
-            if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("EdgeHubConnectionString")))
+            if (!IsRunningInIotEdge())
                 builder.Bind<ICommunicationClient>().To<NullCommunicationClient>();
             else
                 builder.Bind<ICommunicationClient>().To<CommunicationClient>();
+        }
+
+
+        bool IsRunningInIotEdge()
+        {
+            return  !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("EdgeHubConnectionString")) ||
+                    !string.IsNullOrEmpty((Environment.GetEnvironmentVariable("IOTEDGE_MODULEID"));            
         }
     }
 }
