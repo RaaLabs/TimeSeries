@@ -53,7 +53,7 @@ namespace Dolittle.Edge.Modules
         public Task SendAsJson(Output output, object payload)
         {
             _logger.Information($"Send as JSON to '{output}'");
-            var outputMessageString = _serializer.ToJson(payload);
+            var outputMessageString = _serializer.ToJson(payload, SerializationOptions.CamelCase);
             _logger.Information($"Payload: '{outputMessageString}'");
             var outputMessageBytes = Encoding.UTF8.GetBytes(outputMessageString);
             var outputMessage = new Message(outputMessageBytes);
