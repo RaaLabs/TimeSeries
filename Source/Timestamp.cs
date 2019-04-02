@@ -10,13 +10,8 @@ namespace Dolittle.Edge.Modules
     /// <summary>
     /// Represents a timestamp in EPOCH microseconds
     /// </summary>
-    public class Timestamp : Value<Timestamp>
+    public class Timestamp : ConceptAs<long>
     {
-        /// <summary>
-        /// Gets or sets the value
-        /// </summary>
-        public long Value { get; set; }
-
         /// <summary>
         /// Implicitly convert <see cref="Timestamp"/> to its <see cref="long"/> representation
         /// </summary>
