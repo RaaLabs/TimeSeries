@@ -2,13 +2,13 @@
  *  Copyright (c) Dolittle. All rights reserved.
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-
+using System;
 using Dolittle.Concepts;
 
 namespace Dolittle.Edge.Modules
 {
     /// <summary>
-    /// Represents a timestamp in EPOCH microseconds
+    /// Represents a timestamp in EPOCH milliseconds
     /// </summary>
     public class Timestamp : ConceptAs<long>
     {
@@ -27,7 +27,12 @@ namespace Dolittle.Edge.Modules
         /// <param name="timeStamp"><see cref="long"/> representation of <see cref="Timestamp"/></param>
         public static implicit operator Timestamp(long timeStamp)
         {
-            return new Timestamp { Value = timeStamp };
+            return new Timestamp {  Value = timeStamp };
         }
+
+        /// <summary>
+        /// Gets the UTC time for **NOW**
+        /// </summary>
+        public Timestamp UtcNow => DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
     }
 }
