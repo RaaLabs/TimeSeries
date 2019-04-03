@@ -33,6 +33,6 @@ namespace Dolittle.Edge.Modules
         /// <summary>
         /// Gets the UTC time for **NOW**
         /// </summary>
-        public Timestamp UtcNow => DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        public static Timestamp UtcNow => DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
     }
 }
