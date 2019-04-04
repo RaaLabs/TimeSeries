@@ -6,14 +6,14 @@
 namespace Dolittle.Edge.Modules
 {
     /// <summary>
-    /// Represents an data point for a <see cref="Tag"/> on a <see cref="System"/>
+    /// Represents an data point for a <see cref="Tag"/> on a <see cref="ControlSystem"/>
     /// </summary>
     public class TagDataPoint<TValue>
     {
         /// <summary>
-        /// Gets or sets the <see cref="System"/> this value belong to
+        /// Gets or sets the <see cref="ControlSystem"/> this value belong to
         /// </summary>
-        public global::Dolittle.Edge.Modules.System System { get; set; }
+        public ControlSystem ControlSystem { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="Tag"/> this value belong to

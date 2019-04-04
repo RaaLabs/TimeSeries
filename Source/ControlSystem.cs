@@ -10,15 +10,15 @@ namespace Dolittle.Edge.Modules
     /// <summary>
     /// Represents the concept of an System
     /// </summary>
-    public class System : ConceptAs<string>
+    public class ControlSystem : ConceptAs<string>
     {
         /// <summary>
-        /// Implicitly convert from <see cref="string"/> to <see cref="System"/>
+        /// Implicitly convert from <see cref="string"/> to <see cref="ControlSystem"/>
         /// </summary>
         /// <param name="value">System as string</param>
-        public static implicit operator System(string value)
+        public static implicit operator ControlSystem(string value)
         {
-            return new System { Value = value };
+            return new ControlSystem { Value = value };
         }
     }
 }
