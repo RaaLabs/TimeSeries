@@ -20,8 +20,8 @@ namespace Dolittle.Edge.Modules
     public class CommunicationClient : ICommunicationClient
     {
         ModuleClient _client;
-        private readonly ISerializer _serializer;
-        private readonly ILogger _logger;
+        readonly ISerializer _serializer;
+        readonly ILogger _logger;
 
         /// <summary>
         /// Initializes a new instance of <see cref="CommunicationClient"/>
@@ -81,8 +81,6 @@ namespace Dolittle.Edge.Modules
             }, null);
 
         }
-
-        
 
         async Task<MessageResponse> HandleSubscriber<T>(Subscriber<T> subscriber, Message message)
         {
