@@ -5,7 +5,7 @@
 using System.Threading.Tasks;
 using Microsoft.Azure.Devices.Client;
 
-namespace Dolittle.Edge.Modules
+namespace Dolittle.TimeSeries.Modules
 {
     /// <summary>
     /// Represents the delegate of a subscriber of an <see cref="Input"/>

@@ -3,7 +3,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <AssemblyName>Dolittle.Edge.Modules</AssemblyName>
+        <AssemblyName>Dolittle.TimeSeries.Modules</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>

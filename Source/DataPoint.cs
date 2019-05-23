@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-namespace Dolittle.Edge.Modules
+namespace Dolittle.TimeSeries.Modules
 {
     /// <summary>
     /// Represents a datapoint in a <see cref="TimeSeries"/>

@@ -5,7 +5,7 @@
 using System;
 using Dolittle.Concepts;
 
-namespace Dolittle.Edge.Modules
+namespace Dolittle.TimeSeries.Modules
 {
     /// <summary>
     /// Represents a timestamp in EPOCH milliseconds

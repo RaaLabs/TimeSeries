@@ -10,7 +10,7 @@ using Dolittle.DependencyInversion;
 using Dolittle.Lifecycle;
 using Dolittle.Types;
 
-namespace Dolittle.Edge.Modules
+namespace Dolittle.TimeSeries.Modules
 {
     /// <summary>
     /// Represents an implementation of <see cref="IInputHandlers"/>

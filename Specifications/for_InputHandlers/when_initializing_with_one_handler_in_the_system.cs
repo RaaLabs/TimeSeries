@@ -9,7 +9,7 @@ using Machine.Specifications;
 using Moq;
 using It = Machine.Specifications.It;
 
-namespace Dolittle.Edge.Modules.for_InputHandlers
+namespace Dolittle.TimeSeries.Modules.for_InputHandlers
 {
     public class when_initializing_with_one_handler_in_the_system
     {

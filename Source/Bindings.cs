@@ -7,8 +7,16 @@ using Dolittle.DependencyInversion;
 using Microsoft.Azure.Devices.Client;
 using Microsoft.Azure.Devices.Client.Transport.Mqtt;
 
-namespace Dolittle.Edge.Modules
+namespace Dolittle.TimeSeries.Modules
 {
+    /// <summary>
+    /// Defines a system for holding properties
+    /// </summary>
+    public interface IHoldProperties
+    {
+
+    }
+
 
     /// <summary>
     /// Provides bindings

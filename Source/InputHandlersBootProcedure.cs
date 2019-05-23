@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 using Dolittle.Booting;
 
-namespace Dolittle.Edge.Modules
+namespace Dolittle.TimeSeries.Modules
 {
     /// <summary>
     /// Represents a <see cref="ICanPerformBootProcedure">boot procedure</see> that initiates <see cref="IInputHandlers"/>

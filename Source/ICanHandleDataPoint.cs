@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 using System.Threading.Tasks;
 
-namespace Dolittle.Edge.Modules
+namespace Dolittle.TimeSeries.Modules
 {
     /// <summary>
     /// Defines a handler of a <see cref="DataPoint{T}"/>

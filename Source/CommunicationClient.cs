@@ -11,7 +11,7 @@ using Dolittle.Serialization.Json;
 using Microsoft.Azure.Devices.Client;
 using Microsoft.Azure.Devices.Client.Transport.Mqtt;
 
-namespace Dolittle.Edge.Modules
+namespace Dolittle.TimeSeries.Modules
 {
     /// <summary>
     /// Represents an implementation of <see cref="ICommunicationClient"/>

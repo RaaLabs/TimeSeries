@@ -5,7 +5,7 @@
 using System.Threading.Tasks;
 using Microsoft.Azure.Devices.Client;
 
-namespace Dolittle.Edge.Modules
+namespace Dolittle.TimeSeries.Modules
 {
     /// <summary>
     /// Represents a null implementation of <see cref="ICommunicationClient"/>

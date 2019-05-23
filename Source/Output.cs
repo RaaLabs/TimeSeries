@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 using Dolittle.Concepts;
 
-namespace Dolittle.Edge.Modules
+namespace Dolittle.TimeSeries.Modules
 {
     /// <summary>
     /// Represents the concept of an Output
