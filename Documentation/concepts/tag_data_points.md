@@ -21,7 +21,7 @@ Typically, if consuming this type, you can expect the following payload as JSON:
 ```json
 {
     "controlSystem": "string",
-    "tag": "tag,
+    "tag": "tag",
     "value": number | string | any,
     "timestamp": "EPOCH in milliseconds"
 }
