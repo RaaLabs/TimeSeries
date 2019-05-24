@@ -1,6 +1,6 @@
 ---
-title: Modules
-description: The home of the Dolittle TimeSeries Module support
+title: Concepts
+description: Get familiar with the concepts of Dolittle TimeSeries
 keywords: TimeSeries
 author: einari
 weight: 1
