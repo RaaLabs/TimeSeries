@@ -13,7 +13,7 @@ consolidating formats and output in one consistent format. A tag data point will
 have a control system reference on it. To identify the source of the sampled value, it is
 commonly known as a tag. This tag identifier is specific to the control system.
 This identifier is something the Dolittle time series software is in general not using,
-and there is therefor an [identity mapper]({{< relref "/timseries/identitymapper" >}}) that
+and there is therefor an [identity mapper]({{< ref "/timseries/identitymapper" >}}) that
 deals with translating it into what is identified as a [time series]({{< relref time_series >}}).
 
 Typically, if consuming this type, you can expect the following payload as JSON:
