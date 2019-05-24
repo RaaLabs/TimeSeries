@@ -18,4 +18,6 @@ we have our core cloud [platform](/platform) and hosting experience and also our
 
 ## Microsoft IoT Edge
 
-At the core sits
+Dolittle TimeSeries modules are a thin layer on top of [Microsoft IoT Edge modules](https://docs.microsoft.com/en-us/azure/iot-edge/iot-edge-modules).
+It provides an abstraction and simplification of how to work with time series which is somewhat more
+opinionated with the goal of giving more consistency and be more predictable as a result.
