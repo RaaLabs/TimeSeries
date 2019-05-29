@@ -6,8 +6,8 @@ author: einari
 weight: 5
 ---
 {{% notice information %}}
-This feature is still being built out and documentation is therefor
-not implemented here.
+This feature is still being built out and documentation is therefore
+not completed.
 {{% /notice %}}
 
 Recommend reading up on the [identity mapper](/timeseries/identitymapper) and
