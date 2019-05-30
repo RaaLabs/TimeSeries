@@ -16,8 +16,16 @@ It is however important to remember that it is primarily a data point oriented a
 and is not meant for hosting general purpose applications. In Dolittle terms, that is where
 we have our core cloud [platform](/platform) and hosting experience and also our [edge](/edge) solutions.
 
+## Who is this for
+
+The Dolittle TimeSeries Module provide a consistent development experience in how we see software development, with
+high focus on our [core principles](/contributing/guidelines/core_principles/) and [development principles](/contributing/guidelines/development_principles/).
+It also follow 
+
 ## Microsoft IoT Edge
 
 Dolittle TimeSeries modules are a thin layer on top of [Microsoft IoT Edge modules](https://docs.microsoft.com/en-us/azure/iot-edge/iot-edge-modules).
 It provides an abstraction and simplification of how to work with time series which is somewhat more
 opinionated with the goal of giving more consistency and be more predictable as a result.
+
+## Standard data point shapes

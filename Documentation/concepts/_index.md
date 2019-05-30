@@ -5,10 +5,4 @@ keywords: TimeSeries
 author: einari
 weight: 1
 ---
-
-This section describes all the support for TimeSeries Modules. How they work,
-how to build new ones and how to get them deployed.
-
-## Microsoft IoT Edge
-
-At the core sits
+This section holds the concepts you need to get familiar with for Dolittle Time Series.
