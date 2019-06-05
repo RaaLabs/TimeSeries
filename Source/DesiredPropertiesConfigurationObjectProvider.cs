@@ -60,7 +60,7 @@ namespace Dolittle.TimeSeries.Modules
         public object Provide(Type type)
         {
             var name = type.GetFriendlyConfigurationName().ToCamelCase();
-            var json = JsonConvert.ToString(_twin.Properties.Desired[name]);
+            var json = _twin.Properties.Desired[name].ToString();
             var instance = _parsers.Parse(type, name, json);
             if( instance != null ) return instance;
             throw new UnableToProvideConfigurationObject<DesiredPropertiesConfigurationObjectProvider>(type);
