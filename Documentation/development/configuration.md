@@ -51,3 +51,17 @@ public class MyConfiguration : IConfigurationObject
 If you don't have any default constructor but only have properties, an exception
 will be thrown. This is required.
 {{% /notice %}}
+
+Once you have a configuration object defined and it has been configured in the deployments
+desired properties. All you need to do in code is to take a dependency to it in your
+constructor and it will automatically deserialized from the properties.
+
+```csharp
+public class MyConnector
+{
+    public MyConnector(MyConfiguration configuration)
+    {
+        /* Use the configuration */
+    }
+}
+```
