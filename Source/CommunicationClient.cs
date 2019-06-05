@@ -10,6 +10,7 @@ using Dolittle.Logging;
 using Dolittle.Serialization.Json;
 using Microsoft.Azure.Devices.Client;
 using Microsoft.Azure.Devices.Client.Transport.Mqtt;
+using Microsoft.Azure.Devices.Shared;
 
 namespace Dolittle.TimeSeries.Modules
 {
@@ -19,34 +20,23 @@ namespace Dolittle.TimeSeries.Modules
     [Singleton]
     public class CommunicationClient : ICommunicationClient
     {
-        ModuleClient _client;
+        readonly ModuleClient _client;
         readonly ISerializer _serializer;
         readonly ILogger _logger;
 
         /// <summary>
         /// Initializes a new instance of <see cref="CommunicationClient"/>
         /// </summary>
+        /// <param name="client">Underlying <see cref="ModuleClient"/></param>
         /// <param name="logger"><see cref="ILogger"/> for logging</param>
         /// <param name="serializer"><see cref="ISerializer">JSON serializer</see></param>
-        public CommunicationClient(ILogger logger, ISerializer serializer)
+        public CommunicationClient(ModuleClient client, ILogger logger, ISerializer serializer)
         {
             _logger = logger;
             _serializer = serializer;
             logger.Information("Setting up ModuleClient");
 
-            var mqttSetting = new MqttTransportSettings(TransportType.Mqtt_Tcp_Only);
-            ITransportSettings[] settings = { mqttSetting };
-
-            _client = null;
-
-            ModuleClient.CreateFromEnvironmentAsync(settings)
-                .ContinueWith(_ => _client = _.Result)
-                .Wait();
-
-            logger.Information("Open and wait");
-            _client.OpenAsync().Wait();
-            logger.Information("Client is ready");
-
+            _client = client;
         }
 
         /// <inheritdoc/>

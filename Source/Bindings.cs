@@ -10,15 +10,6 @@ using Microsoft.Azure.Devices.Client.Transport.Mqtt;
 namespace Dolittle.TimeSeries.Modules
 {
     /// <summary>
-    /// Defines a system for holding properties
-    /// </summary>
-    public interface IHoldProperties
-    {
-
-    }
-
-
-    /// <summary>
     /// Provides bindings
     /// </summary>
     public class Bindings : ICanProvideBindings
@@ -29,9 +20,10 @@ namespace Dolittle.TimeSeries.Modules
             if (!IsRunningInIotEdge())
                 builder.Bind<ICommunicationClient>().To<NullCommunicationClient>();
             else
+            {
                 builder.Bind<ICommunicationClient>().To<CommunicationClient>();
+            }
         }
-
 
         bool IsRunningInIotEdge()
         {
