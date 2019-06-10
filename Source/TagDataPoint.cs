@@ -6,14 +6,14 @@
 namespace Dolittle.TimeSeries.Modules
 {
     /// <summary>
-    /// Represents an data point for a <see cref="Tag"/> on a <see cref="ControlSystem"/>
+    /// Represents an data point for a <see cref="Tag"/> on a <see cref="Source"/>
     /// </summary>
     public class TagDataPoint<TValue>
     {
         /// <summary>
-        /// Gets or sets the <see cref="ControlSystem"/> this value belong to
+        /// Gets or sets the <see cref="Source"/> this value belong to
         /// </summary>
-        public ControlSystem ControlSystem { get; set; }
+        public Source Source { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="Tag"/> this value belong to

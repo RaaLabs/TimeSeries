@@ -11,4 +11,4 @@ not completed.
 {{% /notice %}}
 
 Recommend reading up on the [identity mapper](/timeseries/identitymapper) and
-how its configuration mapping from control system + tag to timeseries works.
+how its configuration mapping from source + tag to timeseries works.
