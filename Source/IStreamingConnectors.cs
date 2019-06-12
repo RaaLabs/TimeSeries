@@ -6,9 +6,9 @@
 namespace Dolittle.TimeSeries.Modules
 {
     /// <summary>
-    /// Defines a system that is in charge of managing <see cref="IAmAPassiveConnector">passive connectors</see>
+    /// Defines a system that is in charge of managing <see cref="IAmAStreamingConnector">passive connectors</see>
     /// </summary>
-    public interface IPassiveConnectors
+    public interface IStreamingConnectors
     {
         /// <summary>
         /// Start all connectors

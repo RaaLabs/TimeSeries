@@ -2,16 +2,17 @@
  *  Copyright (c) Dolittle. All rights reserved.
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
+
 namespace Dolittle.TimeSeries.Modules
 {
     /// <summary>
-    /// Represents an active connector that is typically connecting on a regular cadence
+    /// Defines a system for working with all <see cref="IAmAPullConnector">pull connectors</see>
     /// </summary>
-    public interface IAmAnActiveConnector
+    public interface IPullConnectors
     {
         /// <summary>
-        /// Connect to the system and return
+        /// Start all <see cref="IAmAPullConnector">pull connectors</see>
         /// </summary>
-        void Connect();
+        void Start();
     }
 }

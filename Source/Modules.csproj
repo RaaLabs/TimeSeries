@@ -1,5 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
-    <Import Project="../Build/MSBuild/default.props"/>
+    <Import Project="../Build/MSBuild/default.props" />
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
@@ -19,6 +19,7 @@
         <PackageReference Include="Dolittle.Concepts.Serialization.Json" Version="3.*" />
         <PackageReference Include="Dolittle.Types" Version="3.*" />
         <PackageReference Include="Microsoft.Azure.Devices.Client" Version="1.*" />
+        <PackageReference Include="polly" Version="7.1.0" />
         <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
     </ItemGroup>
 

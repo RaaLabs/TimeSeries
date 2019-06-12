@@ -5,14 +5,10 @@
 namespace Dolittle.TimeSeries.Modules
 {
     /// <summary>
-    /// Represents a passive connector that connects and data streamed through the channel it
-    /// connects to at the cadence decided by the server
+    /// Represents the callback for when data is received
     /// </summary>
-    public interface IAmAPassiveConnector
-    {
-        /// <summary>
-        /// Connect to the system 
-        /// </summary>
-        void Connect();
-    }
+    /// <param name="tag">Name of the tag that holds the data</param>
+    /// <param name="value">Value of any type</param>
+    /// <param name="timestamp"><see cref="Timestamp"/> of the data received</param>
+    public delegate void DataReceived(Tag tag, object value, Timestamp timestamp);
 }

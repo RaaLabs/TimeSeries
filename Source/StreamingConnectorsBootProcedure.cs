@@ -8,20 +8,20 @@ using Dolittle.Types;
 namespace Dolittle.TimeSeries.Modules
 {
     /// <summary>
-    /// Represents the <see cref="ICanPerformBootProcedure">boot procedure</see> for <see cref="IPassiveConnectors"/>
+    /// Represents the <see cref="ICanPerformBootProcedure">boot procedure</see> for <see cref="IStreamingConnectors"/>
     /// </summary>
-    public class PassiveConnectorsBootProcedure : ICanPerformBootProcedure
+    public class StreamingConnectorsBootProcedure : ICanPerformBootProcedure
     {
-        readonly IPassiveConnectors _passiveConnectors;
+        readonly IStreamingConnectors _streamingConnectors;
 
         /// <summary>
-        /// Initializes a new instance of <see cref="PassiveConnectorsBootProcedure"/>
+        /// Initializes a new instance of <see cref="StreamingConnectorsBootProcedure"/>
         /// </summary>
-        /// <param name="passiveConnectors"></param>
+        /// <param name="streamingConnectors"></param>
         
-        public PassiveConnectorsBootProcedure(IPassiveConnectors passiveConnectors)
+        public StreamingConnectorsBootProcedure(IStreamingConnectors streamingConnectors)
         {
-            _passiveConnectors = passiveConnectors;
+            _streamingConnectors = streamingConnectors;
         }
 
         /// <inheritdoc/>
@@ -30,7 +30,7 @@ namespace Dolittle.TimeSeries.Modules
         /// <inheritdoc/>
         public void Perform()
         {
-            _passiveConnectors.Start();
+            _streamingConnectors.Start();
         }
     }
 }
