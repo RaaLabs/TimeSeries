@@ -3,6 +3,7 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Dolittle.Configuration;
 
 namespace Dolittle.TimeSeries.Modules
@@ -17,9 +18,9 @@ namespace Dolittle.TimeSeries.Modules
         /// Initializes a new instance of <see cref="PullConnectorsConfiguration"/>
         /// </summary>
         /// <param name="sources"></param>
-        public PullConnectorsConfiguration(IReadOnlyDictionary<Source, PullConnectorConfiguration> sources)
+        public PullConnectorsConfiguration(IDictionary<Source, PullConnectorConfiguration> sources)
         {
-            Sources = sources;
+            Sources = new ReadOnlyDictionary<Source,PullConnectorConfiguration>(sources);
         }
 
         /// <summary>
