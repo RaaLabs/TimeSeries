@@ -12,20 +12,16 @@ namespace Dolittle.TimeSeries.Modules
     /// Represents the configuration for <see cref="IPullConnectors"/>
     /// </summary>
     [Name("PullConnectors")]
-    public class PullConnectorsConfiguration : IConfigurationObject
+    public class PullConnectorsConfiguration : 
+        ReadOnlyDictionary<Source, PullConnectorConfiguration>,
+        IConfigurationObject
     {
         /// <summary>
         /// Initializes a new instance of <see cref="PullConnectorsConfiguration"/>
         /// </summary>
         /// <param name="sources"></param>
-        public PullConnectorsConfiguration(IDictionary<Source, PullConnectorConfiguration> sources)
+        public PullConnectorsConfiguration(IDictionary<Source, PullConnectorConfiguration> sources) : base(sources)
         {
-            Sources = new ReadOnlyDictionary<Source,PullConnectorConfiguration>(sources);
         }
-
-        /// <summary>
-        /// Gets the <see cref="Source">sources</see> and their <see cref="PullConnectorConfiguration"/>
-        /// </summary>
-        public IReadOnlyDictionary<Source, PullConnectorConfiguration>  Sources { get; }
     }
 }

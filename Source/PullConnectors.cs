@@ -47,7 +47,7 @@ namespace Dolittle.TimeSeries.Modules
             _logger.Information("Start pull connectors");
             var connectors = _connectors.ToDictionary(_ => _.Name, _ => _);
 
-            foreach ((Source source, PullConnectorConfiguration configuration) in _configuration.Sources)
+            foreach ((Source source, PullConnectorConfiguration configuration) in _configuration)
             {
                 _logger.Information($"Starting '{source}'");
                 var timer = new Timer(configuration.Interval);
