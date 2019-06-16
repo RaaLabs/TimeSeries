@@ -181,20 +181,7 @@ and keep the connectionstring handy.
 We now need to configure the IoT Edge developer tool.
 Use the connectionstring from before and follow the instructions found [here](https://github.com/Azure/iotedgehubdev#quickstart).
 
-## Configuring Module
-
-```json
-{
-    "pullConnectors": {
-        "MyConnector": {
-            "interval": 1000
-        }
-    }
-}
-```
-
 ## Running
-
 
 Running this in a development environment, requires us to configure a deployment that we can use with
 the IoT Edge tooling.
@@ -273,6 +260,24 @@ Once this is configured, we can run the deployment using the `iotedgehubdev` CLI
 ```shell
 $ iotedgehubdev start -d deployment.json -v
 ```
+
+## Configuring Module
+
+In order for the module to start working properly, we will need to set the configuration of the module from IoT Hub.
+Go into the Azure Portal and navigate to your developer machine:
+
+![IoT Edge Device](../getting_started_iot_edge.png)
+
+```json
+{
+    "pullConnectors": {
+        "MyConnector": {
+            "interval": 1000
+        }
+    }
+}
+```
+
 
 
 ## Debugging
