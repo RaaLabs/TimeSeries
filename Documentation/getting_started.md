@@ -78,7 +78,7 @@ container. These are known issues and you might just be better off going for the
 
 Let's add a simple connector that will be discovered and hooked up automatically. We're not going to do anything
 in it, but its the place you'd typically go and add your logic for connecting to a source and get the data from.
-We're going to do a pull based connector, read more about connectors [here]({{< relref developing/connectors >}}).
+We're going to do a pull based connector, read more about connectors [here]({{< relref "developing/connectors" >}}).
 
 Add a class called `Connector` to your project and put the following code into it:
 
