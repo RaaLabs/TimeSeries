@@ -3,9 +3,8 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 using Dolittle.Booting;
-using Dolittle.Types;
 
-namespace Dolittle.TimeSeries.Modules
+namespace Dolittle.TimeSeries.Modules.Connectors
 {
     /// <summary>
     /// Represents the <see cref="ICanPerformBootProcedure">boot procedure</see> for <see cref="IStreamingConnectors"/>

@@ -9,10 +9,8 @@ using Dolittle.Lifecycle;
 using Dolittle.Logging;
 using Dolittle.Serialization.Json;
 using Microsoft.Azure.Devices.Client;
-using Microsoft.Azure.Devices.Client.Transport.Mqtt;
-using Microsoft.Azure.Devices.Shared;
 
-namespace Dolittle.TimeSeries.Modules
+namespace Dolittle.TimeSeries.Modules.IoTEdge
 {
     /// <summary>
     /// Represents an implementation of <see cref="ICommunicationClient"/>

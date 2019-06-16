@@ -3,7 +3,6 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 using System.Threading.Tasks;
-using Microsoft.Azure.Devices.Client;
 
 namespace Dolittle.TimeSeries.Modules
 {

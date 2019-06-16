@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="../Build/MSBuild/specs.props"></Import>
+  <Import Project="../../Build/MSBuild/specs.props"></Import>
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../Source/Modules.csproj"/>
+    <ProjectReference Include="../../Source/Modules/Modules.csproj"/>
   </ItemGroup>
 
 </Project>

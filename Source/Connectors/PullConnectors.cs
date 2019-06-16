@@ -4,13 +4,12 @@
  *--------------------------------------------------------------------------------------------*/
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Timers;
 using Dolittle.Collections;
 using Dolittle.Logging;
 using Dolittle.Types;
 
-namespace Dolittle.TimeSeries.Modules
+namespace Dolittle.TimeSeries.Modules.Connectors
 {
     /// <summary>
     /// Represents an implementation of <see cref="IPullConnectors"/>

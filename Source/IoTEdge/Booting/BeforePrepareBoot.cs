@@ -9,7 +9,7 @@ using Dolittle.Logging;
 using Microsoft.Azure.Devices.Client;
 using Microsoft.Azure.Devices.Client.Transport.Mqtt;
 
-namespace Dolittle.TimeSeries.Modules.Booting
+namespace Dolittle.TimeSeries.Modules.IoTEdge.Booting
 {
     /// <summary>
     /// Represents a step that gets run after <see cref="BootStage.Basics"/> to setup necessary configuration

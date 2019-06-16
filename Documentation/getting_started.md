@@ -6,8 +6,17 @@ author: einari
 weight: 1
 ---
 
+## Introduction
 
-https://github.com/Azure/iotedgehubdev
 
-https://github.com/Azure/iotedgedev/wiki/manual-dev-machine-setup
+## .NET Core
 
+```shell
+$ dotnet new console
+```
+
+```xml
+<ItemGroup>
+    <PackageReference Include="Dolittle.TimeSeries.Modules" Version="4.*" />
+</ItemGroup>
+```

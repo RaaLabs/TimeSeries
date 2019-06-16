@@ -7,7 +7,7 @@ using Dolittle.DependencyInversion;
 using Microsoft.Azure.Devices.Client;
 using Microsoft.Azure.Devices.Client.Transport.Mqtt;
 
-namespace Dolittle.TimeSeries.Modules
+namespace Dolittle.TimeSeries.Modules.IoTEdge
 {
     /// <summary>
     /// Provides bindings

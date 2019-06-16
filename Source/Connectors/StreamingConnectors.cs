@@ -10,7 +10,7 @@ using Dolittle.Logging;
 using Dolittle.Types;
 using Polly;
 
-namespace Dolittle.TimeSeries.Modules
+namespace Dolittle.TimeSeries.Modules.Connectors
 {
     /// <summary>
     /// Represents an implementation of <see cref="IStreamingConnectors"/>

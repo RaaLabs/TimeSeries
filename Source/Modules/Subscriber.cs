@@ -2,17 +2,15 @@
  *  Copyright (c) Dolittle. All rights reserved.
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
+using System.Threading.Tasks;
 
 namespace Dolittle.TimeSeries.Modules
 {
     /// <summary>
-    /// Defines a system for working with all <see cref="IAmAPullConnector">pull connectors</see>
+    /// Represents the delegate of a subscriber of an <see cref="Input"/>
     /// </summary>
-    public interface IPullConnectors
-    {
-        /// <summary>
-        /// Start all <see cref="IAmAPullConnector">pull connectors</see>
-        /// </summary>
-        void Start();
-    }
+    /// <param name="payload">Deserialized payload</param>
+    /// <typeparam name="T">Type of the payload</typeparam>
+    /// <returns>Task</returns>
+    public delegate Task Subscriber<T>(T payload);
 }

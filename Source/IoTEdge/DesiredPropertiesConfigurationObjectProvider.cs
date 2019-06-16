@@ -9,9 +9,8 @@ using Dolittle.Logging;
 using Dolittle.Strings;
 using Microsoft.Azure.Devices.Client;
 using Microsoft.Azure.Devices.Shared;
-using Newtonsoft.Json;
 
-namespace Dolittle.TimeSeries.Modules
+namespace Dolittle.TimeSeries.Modules.IoTEdge
 {
     /// <summary>
     /// 
