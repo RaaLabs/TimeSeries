@@ -268,16 +268,31 @@ Go into the Azure Portal and navigate to your developer machine:
 
 ![IoT Edge Device](../getting_started_iot_edge.png)
 
+Find your module in the list and select it.
+
+We will now configure the **module identity twin** by clicking the button on the top
+
+![Module Identity Twin](../getting_started_module_identity_twin.png)
+
+In the JSON document being displayed, find the top level property called `properties` and
+its object called `desired` within it. Let's put the `pullConnectors` configuration into this:
+
+
 ```json
 {
-    "pullConnectors": {
-        "MyConnector": {
-            "interval": 1000
+    "properties": {
+        "desired": {
+            "pullConnectors": {
+                "MyConnector": {
+                    "interval": 1000
+                }
+            }
         }
     }
 }
 ```
 
-
+Save the configuration using the `Save` button at the top.
+The interval is now set to 1000 milliseconds and will start calling your `GetAllData()` method once a second.
 
 ## Debugging
