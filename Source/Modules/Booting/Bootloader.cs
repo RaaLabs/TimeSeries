@@ -9,7 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Dolittle.Booting;
 
-namespace Dolittle.TimeSeries.Modules.IoTEdge.Booting
+namespace Dolittle.TimeSeries.Modules.Booting
 {
     /// <summary>
     /// Represents the booting sequence for Edge modules
