@@ -91,7 +91,7 @@ namespace MyFirstConnectorModule
 {
     public class Connector : IAmAPullConnector
     {
-        public Source Name => "My Connector";
+        public Source Name => "MyConnector";
 
         public IEnumerable<TagWithData> GetAllData()
         {
@@ -173,7 +173,7 @@ $ docker build -t myfirstconnectormodule . --build-arg CONFIGURATION="Debug"
 ```json
 {
     "pullConnectors": {
-        "My Connector": {
+        "MyConnector": {
             "interval": 1000
         }
     }
@@ -181,3 +181,85 @@ $ docker build -t myfirstconnectormodule . --build-arg CONFIGURATION="Debug"
 ```
 
 ## Running
+
+
+Running this in a development environment, requires us to configure a deployment that we can use with
+the IoT Edge tooling.
+
+Add a file called `deployment.json` in your project and add the following content to it:
+
+```json
+{
+  "modulesContent": {
+    "$edgeAgent": {
+      "properties.desired": {
+        "schemaVersion": "1.0",
+        "runtime": {
+          "type": "docker",
+          "settings": {
+            "minDockerVersion": "v1.25",
+            "loggingOptions": "",
+            "registryCredentials": {}
+          }
+        },
+        "systemModules": {
+          "edgeAgent": {
+            "type": "docker",
+            "env": {
+              "RuntimeLogLevel": "debug"
+            },
+            "settings": {
+              "image": "mcr.microsoft.com/azureiotedge-agent:1.0",
+              "createOptions": "{}"
+            }
+          },
+          "edgeHub": {
+            "type": "docker",
+            "status": "running",
+            "restartPolicy": "always",
+            "settings": {
+              "image": "mcr.microsoft.com/azureiotedge-hub:1.0",
+              "createOptions": "{\"HostConfig\":{\"PortBindings\":{\"5671/tcp\":[{\"HostPort\":\"5671\"}],\"8883/tcp\":[{\"HostPort\":\"8883\"}],\"443/tcp\":[{\"HostPort\":\"443\"}]}}}"
+            }
+          }
+        },
+        "modules": {
+          "MyConnector": {
+            "version": "1.0",
+            "type": "docker",
+            "status": "running",
+            "restartPolicy": "always",
+            "settings": {
+              "image": "myfirstconnectormodule",
+              "createOptions": "{\"HostConfig\":{}}"
+            }
+          }
+        }
+      }
+    },
+    "$edgeHub": {
+      "properties.desired": {
+        "schemaVersion": "1.0",
+        "routes": {
+          "MyConnectorToCloud": "FROM /messages/modules/MyConnector/* INTO $upstream"
+        },
+        "storeAndForwardConfiguration": {
+          "timeToLiveSecs": 7200
+        }
+      }
+    }
+  }
+}
+```
+
+Notice that the connector is called `MyConnector` points to the `myfirstconnectormodule` image.
+You can read more about the deployment manifest and how to manage routing [here](https://docs.microsoft.com/en-us/azure/iot-edge/module-composition).
+
+Once this is configured, we can run the deployment using the `iotedgehubdev` CLI tool:
+
+```shell
+$ iotedgehubdev start -d deployment.json -v
+```
+
+
+## Debugging
