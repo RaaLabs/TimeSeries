@@ -48,8 +48,8 @@ public class MyConfiguration : IConfigurationObject
 ```
 
 {{% notice information %}}
-If you don't have any default constructor but only have properties, an exception
-will be thrown. This is required.
+If you don't have any default constructor with parameters that fulfills the public
+properties but only have properties, an exception will be thrown.
 {{% /notice %}}
 
 Once you have a configuration object defined and it has been configured in the deployments
