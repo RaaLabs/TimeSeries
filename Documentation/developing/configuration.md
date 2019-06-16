@@ -28,7 +28,7 @@ to be set, you will have to provide a constructor that sets these and let the
 parameters on the constructor match by convention the names of the properties.
 
 {{% notice information %}}
-Properties can be PascalCased, while constructor parameters can be camelCased.
+Properties are typically PascalCased, while constructor parameters must be camelCased.
 {{% /notice %}}
 
 ```csharp
