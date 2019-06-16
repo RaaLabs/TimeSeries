@@ -8,12 +8,14 @@ weight: 1
 ## Introduction
 
 This tutorial is for C# and .NET only, as that is the only environment supported right now.
+It builds on top of Azure IoT Hub and the IoT Edge offering from Microsoft.
 
 ## Pre-requisites
 
 * .NET 2.2 or better - download [here](https://dotnet.microsoft.com/download)
-* Microsoft IoT Edge development environment - read more [here](https://github.com/Azure/iotedgedev/wiki/manual-dev-machine-setup)
+* Azure Subscription - read more [here](https://azure.microsoft.com/en-us/)
 * Azure IoT Hub - read more [here](https://github.com/Azure/azure-iot-device-ecosystem/blob/master/setup_iothub.md)
+* Microsoft IoT Edge development environment - read more [here](https://github.com/Azure/iotedgedev/wiki/manual-dev-machine-setup)
 
 ## Setting up project
 
@@ -169,11 +171,12 @@ $ docker build -t myfirstconnectormodule . --build-arg CONFIGURATION="Debug"
 
 ## Configuring IoT Edge Developer tool
 
-In order for us to be able to run this, we need to configure the IoT Edge developer tool.
-Please follow the instructions found [here](https://github.com/Azure/iotedgehubdev#quickstart).
+Your developer machine needs to added as a device in the IoT Edge section of IoT Hub.
+Follow the instructions [here](https://docs.microsoft.com/en-us/azure/iot-edge/how-to-register-device-portal)
+and keep the connectionstring handy.
 
-The connectionstring is available in the Azure Portal 
-
+We now need to configure the IoT Edge developer tool.
+Use the connectionstring from before and follow the instructions found [here](https://github.com/Azure/iotedgehubdev#quickstart).
 
 ## Configuring Module
 
