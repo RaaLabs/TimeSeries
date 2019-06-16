@@ -12,10 +12,13 @@ It builds on top of Azure IoT Hub and the IoT Edge offering from Microsoft.
 
 ## Pre-requisites
 
-* .NET 2.2 or better - download [here](https://dotnet.microsoft.com/download)
-* Azure Subscription - read more [here](https://azure.microsoft.com/en-us/)
-* Azure IoT Hub - read more [here](https://github.com/Azure/azure-iot-device-ecosystem/blob/master/setup_iothub.md)
-* Microsoft IoT Edge development environment - read more [here](https://github.com/Azure/iotedgedev/wiki/manual-dev-machine-setup)
+.NET 2.2 or better - download [here](https://dotnet.microsoft.com/download)
+
+Azure Subscription - read more [here](https://azure.microsoft.com/en-us/)
+
+Azure IoT Hub - read more [here](https://github.com/Azure/azure-iot-device-ecosystem/blob/master/setup_iothub.md)
+
+Microsoft IoT Edge development environment - read more [here](https://github.com/Azure/iotedgedev/wiki/manual-dev-machine-setup)
 
 ## Setting up project
 
