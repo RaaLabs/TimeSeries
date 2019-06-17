@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Timers;
 using Dolittle.Collections;
+using Dolittle.DependencyInversion;
 using Dolittle.Logging;
 using Dolittle.Types;
 
@@ -16,28 +17,28 @@ namespace Dolittle.TimeSeries.Modules.Connectors
     /// </summary>
     public class PullConnectors : IPullConnectors
     {
-        readonly PullConnectorsConfiguration _configuration;
         readonly IInstancesOf<IAmAPullConnector> _connectors;
         readonly ICommunicationClient _communicationClient;
         readonly ILogger _logger;
+        readonly FactoryFor<PullConnectorsConfiguration> _configurationFactory;
 
         /// <summary>
         /// Initializes a new instance of <see cref="PullConnectors"/>
         /// </summary>
-        /// <param name="configuration"></param>
+        /// <param name="configurationFactory"></param>
         /// <param name="connectors"></param>
         /// <param name="communicationClient"></param>
         /// <param name="logger"></param>
         public PullConnectors(
-            PullConnectorsConfiguration configuration,
+            FactoryFor<PullConnectorsConfiguration> configurationFactory,
             IInstancesOf<IAmAPullConnector> connectors,
             ICommunicationClient communicationClient,
             ILogger logger)
         {
-            _configuration = configuration;
             _connectors = connectors;
             _communicationClient = communicationClient;
             _logger = logger;
+            _configurationFactory = configurationFactory;
         }
 
         /// <inheritdoc/>
@@ -46,17 +47,22 @@ namespace Dolittle.TimeSeries.Modules.Connectors
             _logger.Information("Start pull connectors");
             var connectors = _connectors.ToDictionary(_ => _.Name, _ => _);
 
-            foreach ((Source source, PullConnectorConfiguration configuration) in _configuration)
+            if (connectors.Count > 0)
             {
-                _logger.Information($"Starting '{source}'");
-                var timer = new Timer(configuration.Interval);
-                timer.Elapsed += (s, e) =>
+                var configurationObject = _configurationFactory();
+
+                foreach ((Source source, PullConnectorConfiguration configuration) in configurationObject)
                 {
-                    var data = connectors[source].GetAllData();
-                    data.ForEach(dataPoint => _communicationClient.SendAsJson("output", dataPoint));
-                };
-                timer.AutoReset = true;
-                timer.Enabled = true;
+                    _logger.Information($"Starting '{source}'");
+                    var timer = new Timer(configuration.Interval);
+                    timer.Elapsed += (s, e) =>
+                    {
+                        var data = connectors[source].GetAllData();
+                        data.ForEach(dataPoint => _communicationClient.SendAsJson("output", dataPoint));
+                    };
+                    timer.AutoReset = true;
+                    timer.Enabled = true;
+                }
             }
         }
     }
