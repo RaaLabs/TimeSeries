@@ -277,7 +277,6 @@ We will now configure the **module identity twin** by clicking the button on the
 In the JSON document being displayed, find the top level property called `properties` and
 its object called `desired` within it. Let's put the `pullConnectors` configuration into this:
 
-
 ```json
 {
     "properties": {
