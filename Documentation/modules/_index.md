@@ -4,7 +4,6 @@ description: The home of the Dolittle TimeSeries Module support
 keywords: TimeSeries
 author: einari
 weight: 2
-repository: https://github.com/dolittle-timeseries/timeseries
 ---
 
 This section describes all the support for TimeSeries Modules. How they work,
