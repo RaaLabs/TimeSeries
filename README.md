@@ -1,4 +1,4 @@
-# Modules
+# TimeSeries
 
 
 [![Build Status](https://dev.azure.com/dolittle/Dolittle%20open-source%20repositories/_apis/build/status/dolittle-timeseries.Modules?branchName=master)](https://dev.azure.com/dolittle/Dolittle%20open-source%20repositories/_build/latest?definitionId=17&branchName=master)
