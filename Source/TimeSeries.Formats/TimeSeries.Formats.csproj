@@ -6,4 +6,8 @@
         <AssemblyName>Dolittle.TimeSeries.Formats</AssemblyName>
     </PropertyGroup>
 
+    <ItemGroup>
+        <PackageReference Include="Dolittle.Concepts" Version="3.*" />       
+    </ItemGroup>
+
 </Project>
