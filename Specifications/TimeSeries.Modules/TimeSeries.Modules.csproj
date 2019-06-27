@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../../Source/Modules/Modules.csproj"/>
+    <ProjectReference Include="../../Source/TimeSeries.Modules/TimeSeries.Modules.csproj"/>
   </ItemGroup>
 
 </Project>

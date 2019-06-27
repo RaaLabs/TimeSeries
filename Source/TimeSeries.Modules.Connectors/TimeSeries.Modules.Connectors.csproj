@@ -3,14 +3,15 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <AssemblyName>Dolittle.TimeSeries.Modules.IoTEdge</AssemblyName>
+        <AssemblyName>Dolittle.TimeSeries.Modules.Connectors</AssemblyName>
     </PropertyGroup>
-
+    
     <ItemGroup>
-        <ProjectReference Include="../Modules/Modules.csproj"/>
+        <ProjectReference Include="../TimeSeries.Modules/TimeSeries.Modules.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.Azure.Devices.Client" Version="1.*" />
+        <PackageReference Include="polly" Version="7.1.0" />
     </ItemGroup>
+
 </Project>

@@ -2,22 +2,23 @@
  *  Copyright (c) Dolittle. All rights reserved.
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
+using System;
 using Dolittle.Concepts;
 
-namespace Dolittle.TimeSeries.Modules
+namespace Dolittle.TimeSeries
 {
     /// <summary>
     /// Represents the concept of an System
     /// </summary>
-    public class Source : ConceptAs<string>
+    public class TimeSeries : ConceptAs<Guid>
     {
         /// <summary>
-        /// Implicitly convert from <see cref="string"/> to <see cref="Source"/>
+        /// Implicitly convert from <see cref="Guid"/> to <see cref="TimeSeries"/>
         /// </summary>
-        /// <param name="value">System as string</param>
-        public static implicit operator Source(string value)
+        /// <param name="value">TimeSeries as <see cref="Guid"/></param>
+        public static implicit operator TimeSeries(Guid value)
         {
-            return new Source { Value = value };
+            return new TimeSeries { Value = value };
         }
     }
 }

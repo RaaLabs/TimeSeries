@@ -5,6 +5,10 @@
         <TargetFramework>netstandard2.0</TargetFramework>
         <AssemblyName>Dolittle.TimeSeries.Modules</AssemblyName>
     </PropertyGroup>
+    
+    <ItemGroup>
+        <ProjectReference Include="../TimeSeries/TimeSeries.csproj"/>
+    </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="Dolittle.Assemblies" Version="3.*" />
@@ -18,8 +22,6 @@
         <PackageReference Include="Dolittle.Serialization.Json" Version="3.*" />
         <PackageReference Include="Dolittle.Concepts.Serialization.Json" Version="3.*" />
         <PackageReference Include="Dolittle.Types" Version="3.*" />
-        <PackageReference Include="polly" Version="7.1.0" />
-        
     </ItemGroup>
 
 </Project>

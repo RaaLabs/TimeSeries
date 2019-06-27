@@ -4,21 +4,20 @@
  *--------------------------------------------------------------------------------------------*/
 using Dolittle.Concepts;
 
-namespace Dolittle.TimeSeries.Modules
+namespace Dolittle.TimeSeries
 {
-
     /// <summary>
     /// Represents the concept of an System
     /// </summary>
-    public class Tag : ConceptAs<string>
+    public class Source : ConceptAs<string>
     {
         /// <summary>
-        /// Implicitly convert from <see cref="string"/> to <see cref="Tag"/>
+        /// Implicitly convert from <see cref="string"/> to <see cref="Source"/>
         /// </summary>
-        /// <param name="value">Tag as string</param>
-        public static implicit operator Tag(string value)
+        /// <param name="value">System as string</param>
+        public static implicit operator Source(string value)
         {
-            return new Tag {Value = value};
+            return new Source { Value = value };
         }
-    }    
+    }
 }

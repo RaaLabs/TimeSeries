@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-namespace Dolittle.TimeSeries.Modules
+namespace Dolittle.TimeSeries
 {
     /// <summary>
     /// Represents an data point for a <see cref="Tag"/> on a <see cref="Source"/>
