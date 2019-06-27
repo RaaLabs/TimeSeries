@@ -6,7 +6,7 @@ author: einari
 weight: 4
 ---
 A `DataPoint` is an identified data point. Usually this is the result of
-having a [†ag data point]({{< relref tag_data_point >}}) being processed by
+having a [†ag data point]({{< relref tag_data_points >}}) being processed by
 a our [identity mapper](/timeseries/identitymapper) and coming out as this.
 
 The purpose of this new representation is to make the data point more focused
