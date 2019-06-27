@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeSeries", "Source\TimeSe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeSeries.Modules.Connectors", "Source\TimeSeries.Modules.Connectors\TimeSeries.Modules.Connectors.csproj", "{7168B84D-C5E3-4597-8D01-1BF3EA62EDD2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeSeries.Formats", "Source\TimeSeries.Formats\TimeSeries.Formats.csproj", "{7C861A83-0F00-4390-9A8C-7F2CC3DA161B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -88,10 +90,23 @@ Global
 		{7168B84D-C5E3-4597-8D01-1BF3EA62EDD2}.Release|x64.Build.0 = Release|Any CPU
 		{7168B84D-C5E3-4597-8D01-1BF3EA62EDD2}.Release|x86.ActiveCfg = Release|Any CPU
 		{7168B84D-C5E3-4597-8D01-1BF3EA62EDD2}.Release|x86.Build.0 = Release|Any CPU
+		{7C861A83-0F00-4390-9A8C-7F2CC3DA161B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C861A83-0F00-4390-9A8C-7F2CC3DA161B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C861A83-0F00-4390-9A8C-7F2CC3DA161B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7C861A83-0F00-4390-9A8C-7F2CC3DA161B}.Debug|x64.Build.0 = Debug|Any CPU
+		{7C861A83-0F00-4390-9A8C-7F2CC3DA161B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7C861A83-0F00-4390-9A8C-7F2CC3DA161B}.Debug|x86.Build.0 = Debug|Any CPU
+		{7C861A83-0F00-4390-9A8C-7F2CC3DA161B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C861A83-0F00-4390-9A8C-7F2CC3DA161B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C861A83-0F00-4390-9A8C-7F2CC3DA161B}.Release|x64.ActiveCfg = Release|Any CPU
+		{7C861A83-0F00-4390-9A8C-7F2CC3DA161B}.Release|x64.Build.0 = Release|Any CPU
+		{7C861A83-0F00-4390-9A8C-7F2CC3DA161B}.Release|x86.ActiveCfg = Release|Any CPU
+		{7C861A83-0F00-4390-9A8C-7F2CC3DA161B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C4A89B39-3E28-4B3C-8EBA-5BA7D7267185} = {661017D5-B68D-415F-990D-9C545D1F046F}
 		{EBBDE12E-781B-4245-8DED-99AC12F32662} = {661017D5-B68D-415F-990D-9C545D1F046F}
 		{7168B84D-C5E3-4597-8D01-1BF3EA62EDD2} = {661017D5-B68D-415F-990D-9C545D1F046F}
+		{7C861A83-0F00-4390-9A8C-7F2CC3DA161B} = {661017D5-B68D-415F-990D-9C545D1F046F}
 	EndGlobalSection
 EndGlobal
