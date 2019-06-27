@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <Import Project="../../Build/MSBuild/default.props" />
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <AssemblyName>Dolittle.TimeSeries.Modules.Connectors</AssemblyName>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <ProjectReference Include="../TimeSeries.Modules/TimeSeries.Modules.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="polly" Version="7.1.0" />
+    </ItemGroup>
+
+</Project>

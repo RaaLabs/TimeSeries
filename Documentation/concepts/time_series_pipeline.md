@@ -15,7 +15,3 @@ a very closed way within code and run the risk of violating the
 the pipeline enables a completely decoupled approach to it and provides
 a way to compose things together.
 
-The composition part is what the [Microsoft IoT Edge](https://azure.microsoft.com/en-us/services/iot-edge/)
-platform is bringing to the table and we're leveraging this as is.
-This means you can take any module written as a Dolittle TimeSeries
-and deploy it directly through the [Microsoft IoT Hub](https://azure.microsoft.com/en-us/services/iot-hub/).
