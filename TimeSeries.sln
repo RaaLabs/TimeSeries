@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeSeries", "Source\TimeSe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeSeries.Modules.Connectors", "Source\TimeSeries.Modules.Connectors\TimeSeries.Modules.Connectors.csproj", "{7168B84D-C5E3-4597-8D01-1BF3EA62EDD2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeSeries.Formats", "Source\TimeSeries.Formats\TimeSeries.Formats.csproj", "{7C861A83-0F00-4390-9A8C-7F2CC3DA161B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeSeries.DataTypes", "Source\TimeSeries.DataTypes\TimeSeries.DataTypes.csproj", "{7C861A83-0F00-4390-9A8C-7F2CC3DA161B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
