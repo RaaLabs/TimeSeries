@@ -17,8 +17,12 @@ namespace Dolittle.TimeSeries
         public T Value { get; set; }
 
         /// <summary>
-        /// Gets or sets the precision of the value in the range 0 to 1
+        /// Gets or sets the measurement error
         /// </summary>
-        public float Precision { get; set; }
+        /// <remarks>
+        /// Typicaly the value is of a number, an error of 0 would mean there is
+        /// no deviations to be expected from the value - the value is 100% accurate.
+        /// </remarks>
+        public T Error { get; set; }
     }
 }
