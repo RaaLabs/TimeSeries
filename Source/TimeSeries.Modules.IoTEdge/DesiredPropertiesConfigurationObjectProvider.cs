@@ -23,7 +23,6 @@ namespace Dolittle.TimeSeries.Modules.IoTEdge
         readonly ILogger _logger;
         Twin _twin;
 
-
         /// <summary>
         /// Initializes a new instance of <see cref="DesiredPropertiesConfigurationObjectProvider"/>
         /// </summary>
@@ -36,10 +35,13 @@ namespace Dolittle.TimeSeries.Modules.IoTEdge
             ILogger logger)
         {
             _client = client;
-            
-            client.GetTwinAsync()
-                .ContinueWith(_ => _twin = _.Result)
-                .Wait();
+
+            if (IoTEdgeHelpers.IsRunningInIotEdge())
+            {
+                client.GetTwinAsync()
+                    .ContinueWith(_ => _twin = _.Result)
+                    .Wait();
+            }
 
             _parsers = parsers;
             _logger = logger;
@@ -50,6 +52,8 @@ namespace Dolittle.TimeSeries.Modules.IoTEdge
         /// <inheritdoc/>
         public bool CanProvide(Type type)
         {
+            if (IoTEdgeHelpers.IsRunningInIotEdge()) return false;
+
             var name = type.GetFriendlyConfigurationName().ToCamelCase();
             _logger.Information($"Ask for providing {name}");
             return _twin.Properties.Desired.Contains(name);
@@ -61,7 +65,7 @@ namespace Dolittle.TimeSeries.Modules.IoTEdge
             var name = type.GetFriendlyConfigurationName().ToCamelCase();
             var json = _twin.Properties.Desired[name].ToString();
             var instance = _parsers.Parse(type, name, json);
-            if( instance != null ) return instance;
+            if (instance != null) return instance;
             throw new UnableToProvideConfigurationObject<DesiredPropertiesConfigurationObjectProvider>(type);
         }
     }

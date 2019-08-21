@@ -17,18 +17,12 @@ namespace Dolittle.TimeSeries.Modules.IoTEdge
         /// <inheritdoc/>
         public void Provide(IBindingProviderBuilder builder)
         {
-            if (!IsRunningInIotEdge())
+            if (!IoTEdgeHelpers.IsRunningInIotEdge())
                 builder.Bind<ICommunicationClient>().To<NullCommunicationClient>();
             else
             {
                 builder.Bind<ICommunicationClient>().To<CommunicationClient>();
             }
-        }
-
-        bool IsRunningInIotEdge()
-        {
-            return  !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("EdgeHubConnectionString")) ||
-                    !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("IOTEDGE_MODULEID"));
         }
     }
 }

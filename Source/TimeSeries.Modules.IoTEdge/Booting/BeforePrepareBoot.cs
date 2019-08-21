@@ -2,12 +2,9 @@
  *  Copyright (c) Dolittle. All rights reserved.
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-using System;
 using Dolittle.Booting;
-using Dolittle.Booting.Stages;
 using Dolittle.Logging;
 using Microsoft.Azure.Devices.Client;
-using Microsoft.Azure.Devices.Client.Transport.Mqtt;
 
 namespace Dolittle.TimeSeries.Modules.IoTEdge.Booting
 {
@@ -23,7 +20,7 @@ namespace Dolittle.TimeSeries.Modules.IoTEdge.Booting
         /// <inheritdoc/>
         public void Perform(NoSettings settings, IBootStageBuilder builder)
         {
-            if (IsRunningInIotEdge())
+            if (IoTEdgeHelpers.IsRunningInIotEdge())
             {
                 var logger = builder.GetAssociation(WellKnownAssociations.Logger) as ILogger;
                 ModuleClient client = null;                
@@ -40,10 +37,7 @@ namespace Dolittle.TimeSeries.Modules.IoTEdge.Booting
             }
         }
 
-        bool IsRunningInIotEdge()
-        {
-            return  !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("EdgeHubConnectionString")) ||
-                    !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("IOTEDGE_MODULEID"));
-        }
     }
+
+
 }
