@@ -19,7 +19,7 @@ namespace Dolittle.TimeSeries.Modules.IoTEdge
     /// </summary>
     public class DesiredPropertiesConfigurationObjectProvider : ICanProvideConfigurationObjects
     {
-        readonly ModuleClient _client;
+        readonly GetContainer _getContainer;
         readonly IConfigurationFileParsers _parsers;
         readonly ILogger _logger;
         Twin _twin;
@@ -27,37 +27,33 @@ namespace Dolittle.TimeSeries.Modules.IoTEdge
         /// <summary>
         /// Initializes a new instance of <see cref="DesiredPropertiesConfigurationObjectProvider"/>
         /// </summary>
-        /// <param name="clientFactory"><see cref="FactoryFor{T}"/> for getting the underlying <see cref="ModuleClient"/></param>
+        /// <param name="getContainer"><see cref="GetContainer"/> for getting access to the IoC container</param>
         /// <param name="parsers"><see cref="IConfigurationFileParsers"/> for parsing configuration</param>
         /// <param name="logger"><see cref="ILogger"/> for logging</param>
         public DesiredPropertiesConfigurationObjectProvider(
-            FactoryFor<ModuleClient> clientFactory,
+            GetContainer getContainer,
             IConfigurationFileParsers parsers,
             ILogger logger)
         {
-            if (IoTEdgeHelpers.IsRunningInIotEdge())
-            {
-                _client = clientFactory();
-                _client.GetTwinAsync()
-                    .ContinueWith(_ => _twin = _.Result)
-                    .Wait();
-
-                _logger.Information($"Desired properties : {_twin.Properties.Desired.ToJson()}");
-            }
-            else
-            {
-                _client = null;
-            }
-
             _parsers = parsers;
             _logger = logger;
-
+            _getContainer = getContainer;
         }
 
         /// <inheritdoc/>
         public bool CanProvide(Type type)
         {
             if (IoTEdgeHelpers.IsRunningInIotEdge()) return false;
+
+            if( _twin == null )
+            {               
+                var client = _getContainer().Get<ModuleClient>();
+                client.GetTwinAsync()
+                    .ContinueWith(_ => _twin = _.Result)
+                    .Wait();
+
+                _logger.Information($"Desired properties : {_twin.Properties.Desired.ToJson()}");
+            }
 
             var name = type.GetFriendlyConfigurationName().ToCamelCase();
             _logger.Information($"Ask for providing {name}");
