@@ -43,7 +43,7 @@ namespace Dolittle.TimeSeries.Modules.IoTEdge
         /// <inheritdoc/>
         public bool CanProvide(Type type)
         {
-            if (IoTEdgeHelpers.IsRunningInIotEdge()) return false;
+            if (!IoTEdgeHelpers.IsRunningInIotEdge()) return false;
 
             if( _twin == null )
             {               
