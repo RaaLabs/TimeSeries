@@ -5,6 +5,7 @@
 using System;
 using Dolittle.Configuration;
 using Dolittle.Configuration.Files;
+using Dolittle.DependencyInversion;
 using Dolittle.Logging;
 using Dolittle.Strings;
 using Microsoft.Azure.Devices.Client;
@@ -26,27 +27,31 @@ namespace Dolittle.TimeSeries.Modules.IoTEdge
         /// <summary>
         /// Initializes a new instance of <see cref="DesiredPropertiesConfigurationObjectProvider"/>
         /// </summary>
-        /// <param name="client">Underlying <see cref="ModuleClient"/></param>
+        /// <param name="clientFactory"><see cref="FactoryFor{T}"/> for getting the underlying <see cref="ModuleClient"/></param>
         /// <param name="parsers"><see cref="IConfigurationFileParsers"/> for parsing configuration</param>
         /// <param name="logger"><see cref="ILogger"/> for logging</param>
         public DesiredPropertiesConfigurationObjectProvider(
-            ModuleClient client,
+            FactoryFor<ModuleClient> clientFactory,
             IConfigurationFileParsers parsers,
             ILogger logger)
         {
-            _client = client;
-
             if (IoTEdgeHelpers.IsRunningInIotEdge())
             {
-                client.GetTwinAsync()
+                _client = clientFactory();
+                _client.GetTwinAsync()
                     .ContinueWith(_ => _twin = _.Result)
                     .Wait();
+
+                _logger.Information($"Desired properties : {_twin.Properties.Desired.ToJson()}");
+            }
+            else
+            {
+                _client = null;
             }
 
             _parsers = parsers;
             _logger = logger;
 
-            _logger.Information($"Desired properties : {_twin.Properties.Desired.ToJson()}");
         }
 
         /// <inheritdoc/>
