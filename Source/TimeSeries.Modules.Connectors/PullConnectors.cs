@@ -4,6 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Timers;
 using Dolittle.Collections;
 using Dolittle.DependencyInversion;
@@ -58,7 +59,18 @@ namespace Dolittle.TimeSeries.Modules.Connectors
                     timer.Elapsed += (s, e) =>
                     {
                         var data = connectors[source].GetAllData();
-                        data.ForEach(dataPoint => _communicationClient.SendAsJson("output", dataPoint));
+                        data.ForEach(dataPoint => 
+                        {
+                            var value = dataPoint.GetType().GetProperty("Value", BindingFlags.Public)?.GetValue(dataPoint) ?? dataPoint.Data;
+
+                            _communicationClient.SendAsJson("output", new TagDataPoint<object>
+                            {
+                                Source = source,
+                                Tag = dataPoint.Tag,
+                                Value = value,
+                                Timestamp = Timestamp.UtcNow
+                            });
+                        });
                     };
                     timer.AutoReset = true;
                     timer.Enabled = true;
