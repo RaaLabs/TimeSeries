@@ -61,8 +61,6 @@ namespace Dolittle.TimeSeries.Modules.Connectors
                         var data = connectors[source].GetAllData();
                         data.ForEach(dataPoint => 
                         {
-                            var value = dataPoint.GetType().GetProperty("Value", BindingFlags.Public)?.GetValue(dataPoint) ?? dataPoint.Data;
-
                             _communicationClient.SendAsJson("output", new TagDataPoint<object>
                             {
                                 Source = source,
