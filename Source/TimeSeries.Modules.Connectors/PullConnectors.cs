@@ -65,7 +65,7 @@ namespace Dolittle.TimeSeries.Modules.Connectors
                             {
                                 Source = source,
                                 Tag = dataPoint.Tag,
-                                Value = value,
+                                Value = dataPoint.Data,
                                 Timestamp = Timestamp.UtcNow
                             });
                         });
