@@ -4,6 +4,7 @@ description: What are Tag Data Points
 keywords: TimeSeries
 author: einari
 weight: 3
+aliases: /timeseries/timeseries/concepts/tag_data_points
 ---
 A `TagDataPoint` is the type that is expected to be the type coming out of the first module
 at the beginning of a [time series pipeline]({{ relref time_series_pipeline }}).

@@ -4,6 +4,7 @@ description: How to keep configuration
 keywords: TimeSeries, Modules, Configuration
 author: einari
 weight: 3
+aliases: /timeseries/timeseries/modules/configuration
 ---
 Modules that need configuration that is unique per deployment of the module
 can define a strongly typed configuration object and mark it as a configuration

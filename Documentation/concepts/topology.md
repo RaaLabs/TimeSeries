@@ -4,6 +4,7 @@ description: How are time series found in a topology
 keywords: Topology, TimeSeries
 author: einari
 weight: 5
+aliases: /timeseries/timeseries/concepts/topology
 ---
 {{% notice information %}}
 This feature is still being built out and documentation is therefore

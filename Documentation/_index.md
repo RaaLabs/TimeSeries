@@ -5,6 +5,7 @@ keywords: TimeSeries
 author: einari
 weight: 2
 repository: https://github.com/dolittle-timeseries/timeseries
+aliases: /timeseries/timeseries/
 ---
 
 Dolittle TimeSeries provides standards for how [data points]({{< relref "concepts/data_points" >}})

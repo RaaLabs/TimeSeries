@@ -4,6 +4,7 @@ description: What are Data Points
 keywords: TimeSeries
 author: einari
 weight: 4
+aliases: /timeseries/timeseries/concepts/data_points
 ---
 A `DataPoint` is an identified data point. Usually this is the result of
 having a [†ag data point]({{< relref tag_data_points >}}) being processed by
