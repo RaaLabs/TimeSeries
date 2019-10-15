@@ -4,6 +4,7 @@ description: What are time series
 keywords: TimeSeries
 author: einari
 weight: 1
+aliases: /timeseries/timeseries/concepts/time_series
 ---
 Time series is a series of data points listed in time order. Often, you'll find it to be a sequence
 sampled at equally spaced points in time, often referred to as Hz or resolution of sampling.
