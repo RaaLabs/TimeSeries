@@ -1,5 +1,5 @@
 /*---------------------------------------------------------------------------------------------
- *  Copyright (c) Dolittle. All rights reserved.
+ *  Copyright (c) RaaLabs. All rights reserved.
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 using System;
@@ -7,7 +7,7 @@ using Dolittle.DependencyInversion;
 using Microsoft.Azure.Devices.Client;
 using Microsoft.Azure.Devices.Client.Transport.Mqtt;
 
-namespace Dolittle.TimeSeries.Modules.IoTEdge
+namespace RaaLabs.TimeSeries.Modules.IoTEdge
 {
     /// <summary>
     /// Provides bindings

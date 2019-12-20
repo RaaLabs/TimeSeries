@@ -1,9 +1,9 @@
 /*---------------------------------------------------------------------------------------------
- *  Copyright (c) Dolittle. All rights reserved.
+ *  Copyright (c) RaaLabs. All rights reserved.
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-namespace Dolittle.TimeSeries.Modules.Connectors
+namespace RaaLabs.TimeSeries.Modules.Connectors
 {
     /// <summary>
     /// Defines a system that is in charge of managing <see cref="IAmAStreamingConnector">passive connectors</see>

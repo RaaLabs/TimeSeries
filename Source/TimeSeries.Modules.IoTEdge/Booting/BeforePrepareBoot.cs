@@ -1,12 +1,12 @@
 /*---------------------------------------------------------------------------------------------
- *  Copyright (c) Dolittle. All rights reserved.
+ *  Copyright (c) RaaLabs. All rights reserved.
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 using Dolittle.Booting;
 using Dolittle.Logging;
 using Microsoft.Azure.Devices.Client;
 
-namespace Dolittle.TimeSeries.Modules.IoTEdge.Booting
+namespace RaaLabs.TimeSeries.Modules.IoTEdge.Booting
 {
     /// <summary>
     /// Represents a step that gets run after <see cref="BootStage.Basics"/> to setup necessary configuration

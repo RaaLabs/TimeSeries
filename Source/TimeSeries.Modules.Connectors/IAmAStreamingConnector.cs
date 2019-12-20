@@ -1,8 +1,8 @@
 /*---------------------------------------------------------------------------------------------
- *  Copyright (c) Dolittle. All rights reserved.
+ *  Copyright (c) RaaLabs. All rights reserved.
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-namespace Dolittle.TimeSeries.Modules.Connectors
+namespace RaaLabs.TimeSeries.Modules.Connectors
 {
     /// <summary>
     /// Represents a connector type that connects and streams data from the source at the cadence decided by the source

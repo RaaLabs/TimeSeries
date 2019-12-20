@@ -1,5 +1,5 @@
 /*---------------------------------------------------------------------------------------------
- *  Copyright (c) Dolittle. All rights reserved.
+ *  Copyright (c) RaaLabs. All rights reserved.
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 using System.Threading.Tasks;
@@ -9,7 +9,7 @@ using Machine.Specifications;
 using Moq;
 using It = Machine.Specifications.It;
 
-namespace Dolittle.TimeSeries.Modules.for_InputHandlers
+namespace RaaLabs.TimeSeries.Modules.for_InputHandlers
 {
     public class when_initializing_with_one_handler_in_the_system
     {

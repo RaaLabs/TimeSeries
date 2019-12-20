@@ -1,9 +1,9 @@
 /*---------------------------------------------------------------------------------------------
- *  Copyright (c) Dolittle. All rights reserved.
+ *  Copyright (c) RaaLabs. All rights reserved.
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-namespace Dolittle.TimeSeries
+namespace RaaLabs.TimeSeries
 {
     /// <summary>
     /// Represents an data point for a <see cref="Tag"/> on a <see cref="Source"/>

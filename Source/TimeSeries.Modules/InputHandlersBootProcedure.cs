@@ -1,10 +1,10 @@
 /*---------------------------------------------------------------------------------------------
- *  Copyright (c) Dolittle. All rights reserved.
+ *  Copyright (c) RaaLabs. All rights reserved.
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 using Dolittle.Booting;
 
-namespace Dolittle.TimeSeries.Modules
+namespace RaaLabs.TimeSeries.Modules
 {
     /// <summary>
     /// Represents a <see cref="ICanPerformBootProcedure">boot procedure</see> that initiates <see cref="IInputHandlers"/>

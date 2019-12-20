@@ -1,8 +1,8 @@
 /*---------------------------------------------------------------------------------------------
- *  Copyright (c) Dolittle. All rights reserved.
+ *  Copyright (c) RaaLabs. All rights reserved.
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-namespace Dolittle.TimeSeries.Modules
+namespace RaaLabs.TimeSeries.Modules
 {
     /// <summary>
     /// Represents the callback for when data is received
