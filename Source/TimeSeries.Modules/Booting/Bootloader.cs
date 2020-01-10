@@ -35,7 +35,10 @@ namespace RaaLabs.TimeSeries.Modules.Booting
         /// <returns></returns>
         public static Bootloader Configure(Action<IBootBuilder> builderDelegate)
         {
-            var actualBootloader = Dolittle.Booting.Bootloader.Configure(builderDelegate);
+            var actualBootloader = Dolittle.Booting.Bootloader.Configure((_) => {
+                if (builderDelegate != null) builderDelegate(_);
+                _.IncludeAssembliesStartingWith("RaaLabs");
+            });
             var bootloader = new Bootloader(actualBootloader);
             return bootloader;
         }       
