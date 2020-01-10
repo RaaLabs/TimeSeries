@@ -11,7 +11,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Dolittle.Concepts" Version="3.*" />       
+        <PackageReference Include="Dolittle.Concepts" Version="4.*" />       
     </ItemGroup>
 
 </Project>
