@@ -17,8 +17,7 @@ namespace RaaLabs.TimeSeries.Modules.IoTEdge
         /// <returns>True if we are running in IoT Edge context, false if not</returns>
         public static bool IsRunningInIotEdge()
         {
-            return  !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("EdgeHubConnectionString")) ||
-                    !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("IOTEDGE_MODULEID"));
+            return  !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("IOTEDGE_MODULEID"));
         }
 
     }
