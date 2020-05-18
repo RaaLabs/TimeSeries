@@ -4,6 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 using System;
 using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
 using Dolittle.Lifecycle;
 using Dolittle.Logging;
@@ -36,6 +37,62 @@ namespace RaaLabs.TimeSeries.Modules.IoTEdge
 
             _client = client;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="functionHandler"></param>
+        public void RegisterFunctionHandler(Delegate functionHandler)
+        {
+            var methodName = functionHandler.Method.Name;
+            var inputType = functionHandler.Method.GetParameters().FirstOrDefault()?.GetType();
+            var resultType = (functionHandler.Method.ReturnType != null) ? functionHandler.Method.ReturnType : typeof(Task);
+
+            _logger.Information($"Registering method handler method '{methodName}'");
+            _client.SetMethodHandlerAsync(methodName, async (request, context) =>
+            {
+                Type[] inputTypes = (inputType == null) ? new Type[] { } : new Type[] { inputType };
+                var inputs = inputTypes
+                    .Select(_ => (_, Encoding.UTF8.GetString(request.Data)))
+                    .Select(_ => _serializer.FromJson(_._, _.Item2));
+
+                // Will be of either 'Task' or 'Task<T>' type.
+                var resTask = (Task) functionHandler.DynamicInvoke(inputs);
+
+                await resTask;
+
+                // If result is of type 'Task<T>' rather than 'Task', that means that we should return data back to caller.
+                if (resultType.ContainsGenericParameters)
+                {
+                    var downcastedTask = Convert.ChangeType(resTask, resultType);
+                    var innerResultType = resultType.GetGenericArguments().FirstOrDefault();
+                    var property = typeof(Task<>).MakeGenericType(innerResultType).GetProperty("Result");
+                    var result = property.GetValue(downcastedTask);
+
+                    var outputMessageString = _serializer.ToJson(result, SerializationOptions.CamelCase);
+                    var outputMessageBytes = Encoding.UTF8.GetBytes(outputMessageString);
+
+                    return new MethodResponse(outputMessageBytes, 200);
+                }
+
+                return new MethodResponse(200);
+            }, null);
+        }
+
+        /*
+        /// <summary>
+        /// 
+        /// </summary>
+        public void RegisterMethodHandler<T>(Input methodName, MethodHandler<T> methodHandler)
+        {
+            _logger.Information($"Subscribing to '{methodName}' for type '{typeof(T).AssemblyQualifiedName}'");
+            _client.SetMethodHandlerAsync(methodName, async (message, context) =>
+            {
+                var res = await HandleMethod(methodHandler, message);
+                return res;
+            }, null);
+        }
+        */
 
         /// <inheritdoc/>
         public Task SendAsJson(Output output, object payload)
@@ -86,5 +143,21 @@ namespace RaaLabs.TimeSeries.Modules.IoTEdge
                 return MessageResponse.Abandoned;
             }
         }
+
+        /*
+        async Task<MethodResponse> HandleMethod<T>(MethodHandler<T> methodHandler, MethodRequest request)
+        {
+            var response = new MethodResponse(200);
+
+            var messageBytes = request.Data;
+            var messageString = Encoding.UTF8.GetString(messageBytes);
+            var deserialized = _serializer.FromJson<T>(messageString);
+
+            await methodHandler(deserialized);
+
+            return response;
+
+        }
+        */
     }
 }
