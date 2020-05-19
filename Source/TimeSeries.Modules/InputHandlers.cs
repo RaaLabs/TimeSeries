@@ -46,6 +46,9 @@ namespace RaaLabs.TimeSeries.Modules
 
             var dataPointHandlers = _typeFinder.FindMultiple(typeof(ICanHandleDataPoint<>));
             dataPointHandlers.ForEach(_ => SetupSubscriptionFor(_, typeof(ICanHandleDataPoint<>), typeof(DataPoint<>)));
+
+            var methodHandlers = _typeFinder.FindMultiple(typeof(ICanHandleMethods));
+            methodHandlers.ForEach(_ => SetupMethodHandlingFor(_));
         }
 
         void SetupSubscriptionFor(Type handlerType, Type baseHandlerType, Type wrappedType = null) 
@@ -63,6 +66,39 @@ namespace RaaLabs.TimeSeries.Modules
             var handleDelegate = Delegate.CreateDelegate(delegateType, handler, "Handle");
 
             subscribeToMethod.Invoke(_client, new object[] { handler.Input, handleDelegate });
+        }
+
+        void SetupMethodHandlingFor(Type handlerType)
+        {
+            var handler = _container.Get(handlerType);
+            var methods = handlerType.GetMethods().Where(method => method.GetCustomAttributes(true).Any(_ => _ is IotHubMethodAttribute));
+
+            foreach (var method in methods)
+            {
+                var inputTypee = method.GetParameters().FirstOrDefault()?.ParameterType;
+                var returnType = method.ReturnType.GetGenericArguments()?.FirstOrDefault();   // 'T' if ReturnType is 'Task<T>', 'null' if ReturnType is 'Task'
+                var methodName = method.Name;
+
+                var methodHandlerMethodd = _client.GetType().GetMethod("RegisterFunctionHandler", BindingFlags.Public | BindingFlags.Instance);
+                var delegateTypee = MakeHandlerDelegate(inputTypee, returnType);
+                var handleDelegatee = Delegate.CreateDelegate(delegateTypee, handler, methodName);
+
+                methodHandlerMethodd.Invoke(_client, new object[] { handleDelegatee });
+            }
+        }
+
+        private Type MakeHandlerDelegate(Type inputType, Type outputType)
+        {
+            if (outputType != null)
+            {
+                // Create function delegate
+                return (inputType != null) ? typeof(FunctionHandler<,>).MakeGenericType(inputType, outputType) : typeof(FunctionHandler<>).MakeGenericType(outputType);
+            }
+            else
+            {
+                // Create action delegate
+                return (inputType != null) ? typeof(ActionHandler<>).MakeGenericType(inputType) : typeof(ActionHandler);
+            }
         }
     }
 }

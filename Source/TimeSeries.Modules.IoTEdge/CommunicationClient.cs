@@ -4,6 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 using System;
 using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
 using Dolittle.Lifecycle;
 using Dolittle.Logging;
@@ -35,6 +36,44 @@ namespace RaaLabs.TimeSeries.Modules.IoTEdge
             logger.Information("Setting up ModuleClient");
 
             _client = client;
+        }
+
+        /// <inheritdoc/>
+        public void RegisterFunctionHandler(Delegate functionHandler)
+        {
+            var methodName = functionHandler.Method.Name;
+            var inputType = functionHandler.Method.GetParameters().FirstOrDefault()?.GetType();
+            var resultType = (functionHandler.Method.ReturnType != null) ? functionHandler.Method.ReturnType : typeof(Task);
+
+            _logger.Information($"Registering method handler method '{methodName}'");
+            _client.SetMethodHandlerAsync(methodName, async (request, context) =>
+            {
+                Type[] inputTypes = (inputType == null) ? new Type[] { } : new Type[] { inputType };
+                var inputs = inputTypes
+                    .Select(_ => (_, Encoding.UTF8.GetString(request.Data)))
+                    .Select(_ => _serializer.FromJson(_._, _.Item2));
+
+                // Will be of either 'Task' or 'Task<T>' type.
+                var resTask = (Task) functionHandler.DynamicInvoke(inputs);
+
+                await resTask;
+
+                // If result is of type 'Task<T>' rather than 'Task', that means that we should return data back to caller.
+                if (resultType.ContainsGenericParameters)
+                {
+                    var downcastedTask = Convert.ChangeType(resTask, resultType);
+                    var innerResultType = resultType.GetGenericArguments().FirstOrDefault();
+                    var property = typeof(Task<>).MakeGenericType(innerResultType).GetProperty("Result");
+                    var result = property.GetValue(downcastedTask);
+
+                    var outputMessageString = _serializer.ToJson(result, SerializationOptions.CamelCase);
+                    var outputMessageBytes = Encoding.UTF8.GetBytes(outputMessageString);
+
+                    return new MethodResponse(outputMessageBytes, 200);
+                }
+
+                return new MethodResponse(200);
+            }, null);
         }
 
         /// <inheritdoc/>

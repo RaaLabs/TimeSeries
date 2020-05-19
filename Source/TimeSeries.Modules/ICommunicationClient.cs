@@ -2,6 +2,7 @@
  *  Copyright (c) RaaLabs. All rights reserved.
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
+using System;
 using System.Threading.Tasks;
 
 namespace RaaLabs.TimeSeries.Modules
@@ -19,6 +20,13 @@ namespace RaaLabs.TimeSeries.Modules
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         void SubscribeTo<T>(Input input, Subscriber<T> subscriber);
+
+        /// <summary>
+        /// Register handler for Direct Methods
+        /// </summary>
+        /// <param name="methodHandler"></param>
+        /// <returns></returns>
+        void RegisterFunctionHandler(Delegate methodHandler);
 
         /// <summary>
         /// Send a payload as JSON to a specific <see cref="Output"/>
