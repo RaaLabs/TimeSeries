@@ -9,7 +9,6 @@ using Dolittle.Collections;
 using Dolittle.DependencyInversion;
 using Dolittle.Lifecycle;
 using Dolittle.Types;
-using Dolittle.Logging;
 
 namespace RaaLabs.TimeSeries.Modules
 {
@@ -22,7 +21,6 @@ namespace RaaLabs.TimeSeries.Modules
         readonly ICommunicationClient _client;
         readonly IContainer _container;
         readonly ITypeFinder _typeFinder;
-        readonly ILogger _logger;
 
         /// <summary>
         /// Initializes a new instance of <see cref="InputHandlers"/>
@@ -30,17 +28,14 @@ namespace RaaLabs.TimeSeries.Modules
         /// <param name="client"><see cref="ICommunicationClient"/> to use</param>
         /// <param name="typeFinder"><see cref="ITypeFinder"/> for discovering types</param>
         /// <param name="container"><see cref="IContainer"/> for activation of services</param>
-        /// <param name="logger"><see cref="ILogger"/> for logging</param>
         public InputHandlers(
             ICommunicationClient client,
             ITypeFinder typeFinder,
-            IContainer container,
-            ILogger logger)
+            IContainer container)
         {
             _client = client;
             _container = container;
             _typeFinder = typeFinder;
-            _logger = logger;
         }
 
         /// <inheritdoc/>
@@ -83,8 +78,6 @@ namespace RaaLabs.TimeSeries.Modules
                 var inputTypee = method.GetParameters().FirstOrDefault()?.ParameterType;
                 var returnType = method.ReturnType.GetGenericArguments()?.FirstOrDefault();   // 'T' if ReturnType is 'Task<T>', 'null' if ReturnType is 'Task'
                 var methodName = method.Name;
-
-                _logger.Information($"Setting up method handling for '{methodName}'");
 
                 var methodHandlerMethodd = _client.GetType().GetMethod("RegisterFunctionHandler", BindingFlags.Public | BindingFlags.Instance);
                 var delegateTypee = MakeHandlerDelegate(inputTypee, returnType);

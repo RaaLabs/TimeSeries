@@ -38,10 +38,7 @@ namespace RaaLabs.TimeSeries.Modules.IoTEdge
             _client = client;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="functionHandler"></param>
+        /// <inheritdoc/>
         public void RegisterFunctionHandler(Delegate functionHandler)
         {
             var methodName = functionHandler.Method.Name;
@@ -78,21 +75,6 @@ namespace RaaLabs.TimeSeries.Modules.IoTEdge
                 return new MethodResponse(200);
             }, null);
         }
-
-        /*
-        /// <summary>
-        /// 
-        /// </summary>
-        public void RegisterMethodHandler<T>(Input methodName, MethodHandler<T> methodHandler)
-        {
-            _logger.Information($"Subscribing to '{methodName}' for type '{typeof(T).AssemblyQualifiedName}'");
-            _client.SetMethodHandlerAsync(methodName, async (message, context) =>
-            {
-                var res = await HandleMethod(methodHandler, message);
-                return res;
-            }, null);
-        }
-        */
 
         /// <inheritdoc/>
         public Task SendAsJson(Output output, object payload)
@@ -143,21 +125,5 @@ namespace RaaLabs.TimeSeries.Modules.IoTEdge
                 return MessageResponse.Abandoned;
             }
         }
-
-        /*
-        async Task<MethodResponse> HandleMethod<T>(MethodHandler<T> methodHandler, MethodRequest request)
-        {
-            var response = new MethodResponse(200);
-
-            var messageBytes = request.Data;
-            var messageString = Encoding.UTF8.GetString(messageBytes);
-            var deserialized = _serializer.FromJson<T>(messageString);
-
-            await methodHandler(deserialized);
-
-            return response;
-
-        }
-        */
     }
 }

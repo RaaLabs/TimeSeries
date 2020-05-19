@@ -20,9 +20,28 @@ namespace RaaLabs.TimeSeries.Modules.for_InputHandlers
         {
             public Input Input => input_name;
 
-            public Task Handle(SomeData data)
+            [IotHubMethod]
+            public Task ActionWithArgument(SomeData data)
             {
                 return Task.CompletedTask;
+            }
+
+            [IotHubMethod]
+            public Task ActionWithoutArgument()
+            {
+                return Task.CompletedTask;
+            }
+
+            [IotHubMethod]
+            public Task<SomeData> FunctionWithoutArgument()
+            {
+                return Task.FromResult(new SomeData());
+            }
+
+            [IotHubMethod]
+            public Task<SomeData> FunctionWithArgument(SomeData data)
+            {
+                return Task.FromResult(new SomeData());
             }
         }
 
@@ -49,9 +68,24 @@ namespace RaaLabs.TimeSeries.Modules.for_InputHandlers
 
         Because of = () => input_handlers.Initialize();
 
-        It should_register_the_method_handler = () => 
+        It should_register_handler_for_action_without_parameters = () => 
             communication_client.Verify(_ => _
-                .RegisterMethodHandler(input_name, Moq.It.IsAny<MethodHandler<SomeData>>())
+                .RegisterFunctionHandler(Moq.It.Is<ActionHandler>(a => a.Method.Name == "ActionWithoutArgument"))
+            );
+
+        It should_register_handler_for_action_with_parameters = () =>
+            communication_client.Verify(_ => _
+                .RegisterFunctionHandler(Moq.It.Is<ActionHandler<SomeData>>(a => a.Method.Name == "ActionWithArgument"))
+            );
+
+        It should_register_handler_for_function_without_parameters = () =>
+            communication_client.Verify(_ => _
+                .RegisterFunctionHandler(Moq.It.Is<FunctionHandler<SomeData>>(f => f.Method.Name == "FunctionWithoutArgument"))
+            );
+
+        It should_register_handler_for_function_with_parameters = () =>
+            communication_client.Verify(_ => _
+                .RegisterFunctionHandler(Moq.It.Is<FunctionHandler<SomeData, SomeData>>(f => f.Method.Name == "FunctionWithArgument"))
             );
     }
 }

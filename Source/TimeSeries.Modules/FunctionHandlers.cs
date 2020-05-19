@@ -23,13 +23,13 @@ namespace RaaLabs.TimeSeries.Modules
     public delegate Task<ResultType> FunctionHandler<PayloadType, ResultType>(PayloadType payload);
 
     /// <summary>
-    /// 
+    /// Represents the delegate of an action handler/>
     /// </summary>
-    /// <returns></returns>
+    /// <returns>Task</returns>
     public delegate Task ActionHandler();
 
     /// <summary>
-    /// 
+    /// Represents the delegate of an action handler
     /// </summary>
     /// <param name="payload">Deserialized payload</param>
     /// <typeparam name="PayloadType">Type of the input payload</typeparam>

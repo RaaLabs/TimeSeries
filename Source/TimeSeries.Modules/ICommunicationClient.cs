@@ -22,8 +22,10 @@ namespace RaaLabs.TimeSeries.Modules
         void SubscribeTo<T>(Input input, Subscriber<T> subscriber);
 
         /// <summary>
-        /// 
+        /// Register handler for Direct Methods
         /// </summary>
+        /// <param name="methodHandler"></param>
+        /// <returns></returns>
         void RegisterFunctionHandler(Delegate methodHandler);
 
         /// <summary>

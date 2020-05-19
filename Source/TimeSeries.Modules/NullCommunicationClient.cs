@@ -4,7 +4,6 @@
  *--------------------------------------------------------------------------------------------*/
 using System;
 using System.Threading.Tasks;
-using Dolittle.Logging;
 
 namespace RaaLabs.TimeSeries.Modules
 {
@@ -13,25 +12,16 @@ namespace RaaLabs.TimeSeries.Modules
     /// </summary>
     public class NullCommunicationClient : ICommunicationClient
     {
-        readonly ILogger _logger;
-
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="logger"></param>
-        public NullCommunicationClient(ILogger logger)
+        public NullCommunicationClient()
         {
-            _logger = logger;
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="methodHandler"></param>
+        /// <inheritdoc/>
         public void RegisterFunctionHandler(Delegate methodHandler)
         {
-            var methodName = methodHandler.Method.Name;
 
-            _logger.Information($"Registering method handler method '{methodName}'");
         }
 
         /// <inheritdoc/>
