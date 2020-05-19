@@ -51,7 +51,7 @@ namespace RaaLabs.TimeSeries.Modules.IoTEdge
                 Type[] inputTypes = (inputType == null) ? new Type[] { } : new Type[] { inputType };
                 var inputs = inputTypes
                     .Select(_ => (_, Encoding.UTF8.GetString(request.Data)))
-                    .Select(_ => _serializer.FromJson(_._, _.Item2));
+                    .Select(((Type fst, string snd) p) => _serializer.FromJson(p.fst, p.snd));
 
                 // Will be of either 'Task' or 'Task<T>' type.
                 var resTask = (Task) functionHandler.DynamicInvoke(inputs);
