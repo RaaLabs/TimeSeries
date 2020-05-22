@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="../../Build/MSBuild/specs.props"></Import>
 
@@ -8,7 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../../Source/TimeSeries.Modules/TimeSeries.Modules.csproj" />
+    <ProjectReference Include="../../Source/TimeSeries.Modules/TimeSeries.Modules.csproj"/>
+    <ProjectReference Include="../../Source/TimeSeries.Modules.IoTEdge/TimeSeries.Modules.IotEdge.csproj"/>
   </ItemGroup>
 
 </Project>

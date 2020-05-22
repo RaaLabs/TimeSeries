@@ -3,6 +3,7 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using System.Threading.Tasks;
@@ -43,36 +44,21 @@ namespace RaaLabs.TimeSeries.Modules.IoTEdge
         {
             var methodName = functionHandler.Method.Name;
             var inputType = functionHandler.Method.GetParameters().FirstOrDefault()?.GetType();
-            var resultType = (functionHandler.Method.ReturnType != null) ? functionHandler.Method.ReturnType : typeof(Task);
+            var resultType = functionHandler.Method.ReturnType ?? typeof(Task);
 
             _logger.Information($"Registering method handler method '{methodName}'");
             _client.SetMethodHandlerAsync(methodName, async (request, context) =>
             {
-                Type[] inputTypes = (inputType == null) ? new Type[] { } : new Type[] { inputType };
-                var inputs = inputTypes
-                    .Select(_ => (_, Encoding.UTF8.GetString(request.Data)))
-                    .Select(_ => _serializer.FromJson(_._, _.Item2));
-
-                // Will be of either 'Task' or 'Task<T>' type.
-                var resTask = (Task) functionHandler.DynamicInvoke(inputs);
-
-                await resTask;
-
-                // If result is of type 'Task<T>' rather than 'Task', that means that we should return data back to caller.
-                if (resultType.ContainsGenericParameters)
+                try
                 {
-                    var downcastedTask = Convert.ChangeType(resTask, resultType);
-                    var innerResultType = resultType.GetGenericArguments().FirstOrDefault();
-                    var property = typeof(Task<>).MakeGenericType(innerResultType).GetProperty("Result");
-                    var result = property.GetValue(downcastedTask);
-
-                    var outputMessageString = _serializer.ToJson(result, SerializationOptions.CamelCase);
-                    var outputMessageBytes = Encoding.UTF8.GetBytes(outputMessageString);
-
-                    return new MethodResponse(outputMessageBytes, 200);
+                    var res = await ProcessMethod(request, functionHandler, _serializer);
+                    return res;
                 }
-
-                return new MethodResponse(200);
+                catch (Exception e)
+                {
+                    _logger.Error(e.Message);
+                    throw e;
+                }
             }, null);
         }
 
@@ -124,6 +110,57 @@ namespace RaaLabs.TimeSeries.Modules.IoTEdge
                 _logger.Error(ex, "Error during handling");
                 return MessageResponse.Abandoned;
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="functionHandler"></param>
+        /// <param name="serializer"></param>
+        public static async Task<MethodResponse> ProcessMethod(MethodRequest request, Delegate functionHandler, ISerializer serializer)
+        {
+            var inputType = functionHandler.Method.GetParameters().FirstOrDefault()?.ParameterType;
+            var resultType = functionHandler.Method.ReturnType ?? typeof(Task);
+
+            var inputs = DeserializeMethodPayload(inputType, request.Data, serializer).ToArray();
+
+            // Return type of functionHandler will be of either 'Task' or 'Task<T>' type.
+            var resTask = (Task)functionHandler.DynamicInvoke(inputs);
+
+            await resTask;
+
+            // If result is of type 'Task<T>' rather than 'Task', that means that we should return data back to caller.
+            if (resultType.IsGenericType)
+            {
+                var downcastedTask = Convert.ChangeType(resTask, resultType);
+                var innerResultType = resultType.GetGenericArguments().FirstOrDefault();
+                var property = typeof(Task<>).MakeGenericType(innerResultType).GetProperty("Result");
+                var result = property.GetValue(downcastedTask);
+
+                var outputMessageString = serializer.ToJson(result, SerializationOptions.CamelCase);
+                var outputMessageBytes = Encoding.UTF8.GetBytes(outputMessageString);
+
+                return new MethodResponse(outputMessageBytes, 200);
+            }
+
+            return new MethodResponse(200);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="inputType"></param>
+        /// <param name="data"></param>
+        /// <param name="serializer"></param>
+        /// <returns></returns>
+        public static IEnumerable<object> DeserializeMethodPayload(Type inputType, byte[] data, ISerializer serializer)
+        {
+            Type[] inputTypes = (inputType == null) ? new Type[] { } : new Type[] { inputType };
+            var inputStrings = inputTypes.Select(_ => (_, Encoding.UTF8.GetString(data))).ToArray();
+            var deserialized = inputStrings.Select(((Type fst, string snd) p) => serializer.FromJson(p.fst, p.snd, SerializationOptions.CamelCase)).ToArray();
+
+            return deserialized;
         }
     }
 }
