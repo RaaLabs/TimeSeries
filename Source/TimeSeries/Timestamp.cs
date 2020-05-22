@@ -34,5 +34,5 @@ namespace RaaLabs.TimeSeries
         /// Gets the UTC time for **NOW**
         /// </summary>
         public static Timestamp UtcNow => DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-    }
+    } 
 }

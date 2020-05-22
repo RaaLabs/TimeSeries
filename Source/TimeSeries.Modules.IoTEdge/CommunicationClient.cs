@@ -73,7 +73,6 @@ namespace RaaLabs.TimeSeries.Modules.IoTEdge
             return _client.SendEventAsync(output, outputMessage);
         }
 
-
         /// <inheritdoc/>
         public Task SendRaw(Output output, byte[] payload)
         {
