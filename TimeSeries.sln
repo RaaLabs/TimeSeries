@@ -1,23 +1,20 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29613.14
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeSeries.Modules", "Source\TimeSeries.Modules\TimeSeries.Modules.csproj", "{7D641409-798A-4E28-A83A-C2CF4E654CFA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules", "Source\TimeSeries.Modules\TimeSeries.Modules.csproj", "{7D641409-798A-4E28-A83A-C2CF4E654CFA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeSeries.Modules", "Specifications\TimeSeries.Modules\TimeSeries.Modules.csproj", "{16FE7E12-72A3-48E4-848F-DCE1043B1EA7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Specs", "Specifications\TimeSeries.Modules\TimeSeries.Modules.csproj", "{16FE7E12-72A3-48E4-848F-DCE1043B1EA7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{661017D5-B68D-415F-990D-9C545D1F046F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeSeries.Modules.IoTEdge", "Source\TimeSeries.Modules.IoTEdge\TimeSeries.Modules.IoTEdge.csproj", "{C4A89B39-3E28-4B3C-8EBA-5BA7D7267185}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IoTEdge", "Source\TimeSeries.Modules.IoTEdge\TimeSeries.Modules.IoTEdge.csproj", "{C4A89B39-3E28-4B3C-8EBA-5BA7D7267185}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeSeries", "Source\TimeSeries\TimeSeries.csproj", "{EBBDE12E-781B-4245-8DED-99AC12F32662}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeSeries", "Source\TimeSeries\TimeSeries.csproj", "{EBBDE12E-781B-4245-8DED-99AC12F32662}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeSeries.Modules.Connectors", "Source\TimeSeries.Modules.Connectors\TimeSeries.Modules.Connectors.csproj", "{7168B84D-C5E3-4597-8D01-1BF3EA62EDD2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeSeries.Modules.Connectors", "Source\TimeSeries.Modules.Connectors\TimeSeries.Modules.Connectors.csproj", "{7168B84D-C5E3-4597-8D01-1BF3EA62EDD2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeSeries.DataTypes", "Source\TimeSeries.DataTypes\TimeSeries.DataTypes.csproj", "{7C861A83-0F00-4390-9A8C-7F2CC3DA161B}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeSeries.Modules.IoTEdge", "Specifications\TimeSeries.Modules.IoTEdge\TimeSeries.Modules.IoTEdge.csproj", "{EF455D41-AFEA-4D1A-8C7B-B664575C8274}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeSeries.DataTypes", "Source\TimeSeries.DataTypes\TimeSeries.DataTypes.csproj", "{7C861A83-0F00-4390-9A8C-7F2CC3DA161B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +24,9 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{7D641409-798A-4E28-A83A-C2CF4E654CFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -101,29 +101,11 @@ Global
 		{7C861A83-0F00-4390-9A8C-7F2CC3DA161B}.Release|x64.Build.0 = Release|Any CPU
 		{7C861A83-0F00-4390-9A8C-7F2CC3DA161B}.Release|x86.ActiveCfg = Release|Any CPU
 		{7C861A83-0F00-4390-9A8C-7F2CC3DA161B}.Release|x86.Build.0 = Release|Any CPU
-		{EF455D41-AFEA-4D1A-8C7B-B664575C8274}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EF455D41-AFEA-4D1A-8C7B-B664575C8274}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EF455D41-AFEA-4D1A-8C7B-B664575C8274}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{EF455D41-AFEA-4D1A-8C7B-B664575C8274}.Debug|x64.Build.0 = Debug|Any CPU
-		{EF455D41-AFEA-4D1A-8C7B-B664575C8274}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{EF455D41-AFEA-4D1A-8C7B-B664575C8274}.Debug|x86.Build.0 = Debug|Any CPU
-		{EF455D41-AFEA-4D1A-8C7B-B664575C8274}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EF455D41-AFEA-4D1A-8C7B-B664575C8274}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EF455D41-AFEA-4D1A-8C7B-B664575C8274}.Release|x64.ActiveCfg = Release|Any CPU
-		{EF455D41-AFEA-4D1A-8C7B-B664575C8274}.Release|x64.Build.0 = Release|Any CPU
-		{EF455D41-AFEA-4D1A-8C7B-B664575C8274}.Release|x86.ActiveCfg = Release|Any CPU
-		{EF455D41-AFEA-4D1A-8C7B-B664575C8274}.Release|x86.Build.0 = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C4A89B39-3E28-4B3C-8EBA-5BA7D7267185} = {661017D5-B68D-415F-990D-9C545D1F046F}
 		{EBBDE12E-781B-4245-8DED-99AC12F32662} = {661017D5-B68D-415F-990D-9C545D1F046F}
 		{7168B84D-C5E3-4597-8D01-1BF3EA62EDD2} = {661017D5-B68D-415F-990D-9C545D1F046F}
 		{7C861A83-0F00-4390-9A8C-7F2CC3DA161B} = {661017D5-B68D-415F-990D-9C545D1F046F}
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {A26095D3-9A08-45E4-A42E-A8E2044A1F30}
 	EndGlobalSection
 EndGlobal
