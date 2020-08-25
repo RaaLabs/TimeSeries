@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="../../Build/MSBuild/specs.props"></Import>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <AssemblyName>RaaLabs.TimeSeries.Modules.Specs</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../Source/TimeSeries.Modules/TimeSeries.Modules.csproj" />
+    <ProjectReference Include="../../Source/TimeSeries.Modules.EventBus/TimeSeries.Modules.EventBus.csproj" />
+  </ItemGroup>
+
+</Project>
