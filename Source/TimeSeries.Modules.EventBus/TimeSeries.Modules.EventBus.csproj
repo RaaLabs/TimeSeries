@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <Import Project="../../default.props" />
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <AssemblyName>RaaLabs.TimeSeries.Modules.EventBus</AssemblyName>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <ProjectReference Include="../TimeSeries/TimeSeries.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="../../Source/TimeSeries.Modules/TimeSeries.Modules.csproj" />
+
+        <PackageReference Include="System.Threading.Channels" Version="4.7.1" />
+    </ItemGroup>
+
+</Project>
