@@ -40,9 +40,6 @@ namespace RaaLabs.TimeSeries.Modules.EventBus
             _eventEmitters = eventEmitters.Distinct().ToList();
             _eventConsumers = eventConsumers.Distinct().ToList();
 
-            VerifyIsSingleton(_eventEmitters.Select(_ => _.GetType()));
-            VerifyIsSingleton(_eventConsumers.Select(_ => _.GetType()));
-
             _eventRouters = new List<EventRouter>();
         }
 
@@ -113,23 +110,6 @@ namespace RaaLabs.TimeSeries.Modules.EventBus
         public async Task Run()
         {
             await Task.WhenAll(_eventRouters.Select(async _ => await _.Run()));
-        }
-
-        private void VerifyIsSingleton(IEnumerable<Type> types)
-        {
-            foreach(var type in types)
-            {
-                VerifyIsSingleton(type);
-            }
-        }
-
-        private void VerifyIsSingleton(Type type)
-        {
-            bool hasSingletonAttribute = type.CustomAttributes.Any(attribute => attribute.AttributeType == typeof(SingletonAttribute));
-            if (!hasSingletonAttribute)
-            {
-                throw new Exception($"Class should be singleton: {type}");
-            }
         }
 
         /// <inheritdoc/>
