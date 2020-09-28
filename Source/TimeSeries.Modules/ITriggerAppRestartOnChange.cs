@@ -1,6 +1,9 @@
-namespace RaaLabs.TimeSeries
+namespace RaaLabs.TimeSeries.Modules
 {
-    interface ITriggerAppRestartOnChange
+    /// <summary>
+    /// Marker interface indicating that this file may change on disk, which will trigger an application shutdown.
+    /// </summary>
+    public interface ITriggerAppRestartOnChange
     {
     }
 }

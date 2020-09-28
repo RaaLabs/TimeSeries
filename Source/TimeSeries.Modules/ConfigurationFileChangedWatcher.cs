@@ -9,7 +9,7 @@ using System.Linq;
 using Dolittle.Configuration;
 using Dolittle.Configuration.Files;
 
-namespace RaaLabs.TimeSeries
+namespace RaaLabs.TimeSeries.Modules
 {
     /// <summary>
     /// This class will monitor all files associated with configuration classes implementing ITriggerAppRestartOnChange,
