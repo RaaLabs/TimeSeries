@@ -6,11 +6,14 @@ using System.Reflection;
 using Dolittle.Booting;
 using Dolittle.Types;
 using System.Linq;
+using System.Threading;
 using Dolittle.Configuration;
 using Dolittle.Configuration.Files;
+using Dolittle.Logging;
 
 namespace RaaLabs.TimeSeries.Modules
 {
+
     /// <summary>
     /// This class will monitor all files associated with configuration classes implementing ITriggerAppRestartOnChange,
     /// and halts the application if any of these files change.
@@ -21,16 +24,20 @@ namespace RaaLabs.TimeSeries.Modules
         private readonly FileConfigurationObjectsProvider _fileProvider;
         private static readonly string[] _searchPaths = { ".dolittle", "config", "/config", "data", ".", ".." };
         private static readonly HashSet<string> _validConfigurationExtensions = new HashSet<string> { ".json" };
-        private List<FileSystemWatcher> _watchers;
+        private readonly ILogger _logger;
+        //private List<PhysicalFileProvider> _watchers;
+        private Thread _watcherThread;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="typeFinder"></param>
+        /// <param name="logger"></param>
         /// <param name="fileProvider"></param>
-        public ConfigurationFileChangedWatcher(ITypeFinder typeFinder, FileConfigurationObjectsProvider fileProvider)
+        public ConfigurationFileChangedWatcher(ITypeFinder typeFinder, ILogger logger, FileConfigurationObjectsProvider fileProvider)
         {
             _typeFinder = typeFinder;
+            _logger = logger;
             _fileProvider = fileProvider;
         }
 
@@ -39,7 +46,7 @@ namespace RaaLabs.TimeSeries.Modules
         /// <inheritdoc/>
         public void Perform()
         {
-            var configurationClasses = _typeFinder.FindMultiple<ITriggerAppRestartOnChange>();
+            var configurationClasses = _typeFinder.FindMultiple<RaaLabs.TimeSeries.Modules.ITriggerAppRestartOnChange>();
             var filenames = configurationClasses
                 .Where(_ => _fileProvider.CanProvide(_))
                 .Select(clazz => (clazz, attribute: clazz.GetCustomAttribute<NameAttribute>(true)))
@@ -49,29 +56,24 @@ namespace RaaLabs.TimeSeries.Modules
             var pwd = Directory.GetCurrentDirectory();
 
             var filesToWatch = filenames.Select(_ => (_.clazz, path: FindConfigurationFilePath(_.Name))).ToArray();
-            var foldersToWatch = filesToWatch
-                .GroupBy(_ => Path.GetDirectoryName(_.path));
 
-            _watchers = foldersToWatch.Select(_ => SetupWatcherForDirectory(_)).ToList();
-        }
+            // Neither FileSystemWatcher nor PhysicalFileProvider have worked platform-independently at watching files asynchronously,
+            // not even with DOTNET_USE_POLLING_FILE_WATCHER=1. Because of this, we will watch all configuration files manually instead.
+            _watcherThread = new Thread(_ =>
+            {
+                var filesChangedAt = filesToWatch.ToDictionary(file => file.path, file => File.GetLastWriteTimeUtc(file.path));
 
-        private FileSystemWatcher SetupWatcherForDirectory(IGrouping<string, (Type clazz, string filename)> filesToWatchInFolder)
-        {
-            FileSystemWatcher watcher = new FileSystemWatcher();
-            var folder = filesToWatchInFolder.Key;
-            var filesToClass = filesToWatchInFolder
-                .ToDictionary(_ => _.filename, _ => _.clazz);
-
-            watcher.Path = folder;
-            watcher.Changed += (sender, args) => {
-                if (!filesToClass.ContainsKey(args.FullPath)) return;
-
-                Environment.Exit(0);
-            };
-
-            watcher.EnableRaisingEvents = true;
-
-            return watcher;
+                while (true)
+                {
+                    if (filesChangedAt.Any(file => File.GetLastWriteTimeUtc(file.Key) != file.Value))
+                    {
+                        _logger.Information($"Configuration changed, restarting application...");
+                        Environment.Exit(0);
+                    }
+                    Thread.Sleep(5_000);
+                }
+            });
+            _watcherThread.Start();
         }
 
         private string FindConfigurationFilePath(string filename)
