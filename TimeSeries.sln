@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeSeries.Modules", "Source\TimeSeries.Modules\TimeSeries.Modules.csproj", "{7D641409-798A-4E28-A83A-C2CF4E654CFA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeSeries.Modules", "Specifications\TimeSeries.Modules\TimeSeries.Modules.csproj", "{16FE7E12-72A3-48E4-848F-DCE1043B1EA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeSeries.Modules.Specs", "Specifications\TimeSeries.Modules\TimeSeries.Modules.csproj", "{16FE7E12-72A3-48E4-848F-DCE1043B1EA7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{661017D5-B68D-415F-990D-9C545D1F046F}"
 EndProject
@@ -17,15 +17,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeSeries.Modules.Connecto
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeSeries.DataTypes", "Source\TimeSeries.DataTypes\TimeSeries.DataTypes.csproj", "{7C861A83-0F00-4390-9A8C-7F2CC3DA161B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeSeries.Modules.IoTEdge", "Specifications\TimeSeries.Modules.IoTEdge\TimeSeries.Modules.IoTEdge.csproj", "{5D93709C-2F2F-48F9-9E3A-C395F06887F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeSeries.Modules.IoTEdge.Specs", "Specifications\TimeSeries.Modules.IoTEdge\TimeSeries.Modules.IoTEdge.csproj", "{5D93709C-2F2F-48F9-9E3A-C395F06887F5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeSeries.Modules.EventBus", "Source\TimeSeries.Modules.EventBus\TimeSeries.Modules.EventBus.csproj", "{EF7363BD-67E1-4E86-AB04-DB8DA174E5CA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeSeries.Modules.EventBus", "Specifications\TimeSeries.Modules.EventBus\TimeSeries.Modules.EventBus.csproj", "{65EE0D74-89FC-4371-BE4D-F292752FDFF9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeSeries.Modules.EventBus.Specs", "Specifications\TimeSeries.Modules.EventBus\TimeSeries.Modules.EventBus.csproj", "{65EE0D74-89FC-4371-BE4D-F292752FDFF9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeSeries.Compression", "Source\TimeSeries.Compression\TimeSeries.Compression.csproj", "{7F471EF8-3918-4A6C-BF30-B8FE2B0C35FC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeSeries.Compression", "Specifications\TimeSeries.Compression\TimeSeries.Compression.csproj", "{539FFD8D-21AF-4E9E-A112-6CC78DBE4BB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeSeries.Compression.Specs", "Specifications\TimeSeries.Compression\TimeSeries.Compression.csproj", "{539FFD8D-21AF-4E9E-A112-6CC78DBE4BB4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
