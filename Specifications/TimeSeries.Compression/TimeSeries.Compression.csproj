@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="../../Build/MSBuild/specs.props"></Import>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <AssemblyName>RaaLabs.TimeSeries.Compression.Specs</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../Source/TimeSeries.Compression/TimeSeries.Compression.csproj"/>
+    <ProjectReference Include="../../Source/TimeSeries.DataTypes/TimeSeries.DataTypes.csproj"/>
+  </ItemGroup>
+
+</Project>
