@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using Google.Protobuf;
+using System.Threading.Tasks;
 
 namespace RaaLabs.TimeSeries.Compression
 {
@@ -41,6 +42,49 @@ namespace RaaLabs.TimeSeries.Compression
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="payload"></param>
+        /// <param name="dataPoints"></param>
+        /// <param name="maxFrameSize"></param>
+        /// <returns></returns>
+        public static IEnumerable<byte> Append(IEnumerable<byte> payload, IEnumerable<DataPoint<dynamic>> dataPoints, int maxFrameSize = 100_000)
+        {
+            var distinctTimeSeries = dataPoints.Select(_ => _.TimeSeries).Distinct();
+            if (distinctTimeSeries.Count() > 1)
+            {
+                throw new Exception("Unable to compress data points: All data points must come from the same time series.");
+            }
+            var timeSeries = distinctTimeSeries.First();
+
+            Protobuf.TimeSeriesFrame parsedFrame;
+
+            var lastFrame = LastFrame(payload, out int offset);
+            var lastFrameSize = BitConverter.ToInt32(lastFrame.Take(4).ToArray(), 0);
+            if (lastFrameSize < maxFrameSize || maxFrameSize < 0)
+            {
+                parsedFrame = Protobuf.TimeSeriesFrame.Parser.ParseFrom(lastFrame.Skip(4).ToArray()).Uncompress();
+                if (timeSeries.Value != new Guid(parsedFrame.TimeSeries.ToByteArray()))
+                {
+                    throw new Exception("Unable to compress data points: New and old data points are not from the same source.");
+                }
+
+                parsedFrame.UncompressedPayload = parsedFrame.UncompressedPayload.Append(dataPoints.Select(_ => _.ToProtobuf()));
+
+                var newLastFrame = parsedFrame.Compress().ToByteArray();
+                return payload.Take(offset)
+                    .Concat(BitConverter.GetBytes(newLastFrame.Length))
+                    .Concat(newLastFrame);
+            }
+            else
+            {
+                var newFrame = Compress(dataPoints);
+                return payload
+                    .Concat(newFrame);
+            }
+        }
+
+        /// <summary>
         /// Decompress a byte array into its individual data points.
         /// </summary>
         /// <param name="payload">the byte array containing data points</param>
@@ -74,6 +118,32 @@ namespace RaaLabs.TimeSeries.Compression
                 packedMessages = packedMessages.Skip(4 + messageLength);
 
                 yield return message;
+            }
+        }
+
+        /// <summary>
+        /// Get the last frame of the payload
+        /// </summary>
+        /// <param name="payload"></param>
+        /// <param name="offset"></param>
+        /// <returns></returns>
+        private static IEnumerable<byte> LastFrame(IEnumerable<byte> payload, out int offset)
+        {
+            var current = payload;
+            offset = 0;
+            while (true)
+            {
+                var frameSize = BitConverter.ToInt32(current.Take(4).ToArray(), 0);
+                var newCurrent = current.Skip(frameSize + 4);
+                if (newCurrent.Any())
+                {
+                    current = newCurrent;
+                    offset += frameSize + 4;
+                }
+                else
+                {
+                    return current;
+                }
             }
         }
     }

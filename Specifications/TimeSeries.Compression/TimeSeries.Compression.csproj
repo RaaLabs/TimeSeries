@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="../../Build/MSBuild/specs.props"></Import>
 
@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../../Source/TimeSeries.Compression/TimeSeries.Compression.csproj"/>
-    <ProjectReference Include="../../Source/TimeSeries.DataTypes/TimeSeries.DataTypes.csproj"/>
+    <ProjectReference Include="../../Source/TimeSeries.Compression/TimeSeries.Compression.csproj" />
+    <ProjectReference Include="../../Source/TimeSeries.DataTypes/TimeSeries.DataTypes.csproj" />
   </ItemGroup>
 
 </Project>
