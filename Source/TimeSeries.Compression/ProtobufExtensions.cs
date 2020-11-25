@@ -116,14 +116,17 @@ namespace RaaLabs.TimeSeries.Compression
             var longitudes = dataPoints.Where(_ => _.MeasurementCase == Protobuf.DataPoint.MeasurementOneofCase.Coordinate).Select(_ => _.Coordinate.Longitude);
             var latitudes = dataPoints.Where(_ => _.MeasurementCase == Protobuf.DataPoint.MeasurementOneofCase.Coordinate).Select(_ => _.Coordinate.Latitude);
 
-            switch (dataPoints.First().MeasurementCase)
+            if (payload.PayloadCase == Protobuf.TimeSeriesPayload.PayloadOneofCase.None)
             {
-                case Protobuf.DataPoint.MeasurementOneofCase.Value:
-                    payload.Values = new Protobuf.TimeSeriesPayload.Types.Values();
-                    break;
-                case Protobuf.DataPoint.MeasurementOneofCase.Coordinate:
-                    payload.Coordinates = new Protobuf.TimeSeriesPayload.Types.Coordinates();
-                    break;
+                switch (dataPoints.First().MeasurementCase)
+                {
+                    case Protobuf.DataPoint.MeasurementOneofCase.Value:
+                        payload.Values = new Protobuf.TimeSeriesPayload.Types.Values();
+                        break;
+                    case Protobuf.DataPoint.MeasurementOneofCase.Coordinate:
+                        payload.Coordinates = new Protobuf.TimeSeriesPayload.Types.Coordinates();
+                        break;
+                }
             }
 
             payload.Values?.Value?.AddRange(values);
